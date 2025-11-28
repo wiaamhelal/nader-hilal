@@ -6,78 +6,30 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import TranslateWidget from "./TranslateWedgit";
 import Logo from "../img/WhatsApp_Image_2025-11-18_at_01.33.12_1e0bf741-removebg-preview.png";
 import menuToggle from "../img/menu-alt-1-svgrepo-com.svg";
+import phone from "../img/phone-call-alt-1-svgrepo-com.svg";
+import whatsap from "../img/whatsapp-svgrepo-com.svg";
+import focebook from "../img/facebook-176-svgrepo-com.svg";
+import linkedien from "../img/linkedin-161-svgrepo-com.svg";
+import instgram from "../img/instagram-svgrepo-com.svg";
+import language from "../img/earth-8-svgrepo-com.svg";
 const Headerr = () => {
   const dispatch = useDispatch();
-
   return (
-    // <Main className="">
-    //   <nav
-    //     className="navbar navbar-expand-lg navbar-dark my-nav"
-    //     style={{ background: "#171717" }}
-    //   >
-    //     <img src={Logo} alt="" />
-    //     <div className="container-fluid justify-content-end">
-    //       <button
-    //         className="navbar-toggler "
-    //         type="button"
-    //         data-bs-toggle="collapse"
-    //         data-bs-target="#navbarSupportedContent"
-    //         aria-controls="navbarSupportedContent"
-    //         aria-expanded="false"
-    //         aria-label="Toggle navigation"
-    //       >
-    //         <span className="navbar-toggler-icon "></span>
-    //       </button>
-
-    //       <div
-    //         className="collapse navbar-collapse d-flex justify-content-between"
-    //         id="navbarSupportedContent"
-    //       >
-    //         <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
-    //           <li className="nav-item">
-    //             <Link className="nav-link active" aria-current="page" to="/">
-    //               Home
-    //             </Link>
-    //           </li>
-    //           <li className="nav-item">
-    //             <Link className="nav-link" to="/products2">
-    //               Brouse
-    //             </Link>
-    //           </li>
-    //           <li className="nav-item">
-    //             <Link
-    //               className="nav-link"
-    //               to="/contactus"
-    //               tabindex="-1"
-    //               aria-disabled="true"
-    //             >
-    //               Contact Us
-    //             </Link>
-    //           </li>
-    //           <li className="nav-item dropdown">
-    //             <Link
-    //               className="nav-link dropdown-toggle"
-    //               to="#"
-    //               id="navbarDropdown"
-    //               role="button"
-    //               data-bs-toggle="dropdown"
-    //               aria-expanded="false"
-    //             >
-    //               Language
-    //             </Link>
-    //             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-    //               <li>
-    //                 <LanguageSwitcher />
-    //                 <TranslateWidget />
-    //               </li>
-    //             </ul>
-    //           </li>
-    //         </ul>
-    //       </div>
-    //     </div>
-    //   </nav>
-    // </Main>
     <Main>
+      <div className="contacnt">
+        <div className="box">
+          <img src={focebook} alt="" />
+          <img src={linkedien} alt="" />
+          <img src={instgram} alt="" />
+          <img src={phone} alt="" />
+          <img src={whatsap} alt="" />
+
+          <div className="d-flex align-items-center">
+            <span className="distin">|</span>
+            <img src={language} alt="" /> <span className="lang">EN AR</span>
+          </div>
+        </div>
+      </div>
       <nav
         className="navbar navbar-expand-lg navbar-dark my-nav"
         style={{ background: "#171717" }}
@@ -151,8 +103,33 @@ const Main = styled.div`
   background-color: #171717;
   margin-top: -1px;
 
+  .contacnt {
+    height: 33px;
+    background: #000000;
+    display: flex;
+    justify-content: center;
+  }
+
+  .box {
+    width: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+
+    img {
+      width: 15px;
+      height: 15px;
+    }
+  }
+  & .lang {
+    color: #b89564;
+    font-size: 13px;
+    margin-left: 7px;
+  }
+
   & .logo-img {
-    width: 150px;
+    width: 120px;
     object-fit: contain;
     margin-left: 10px;
   }

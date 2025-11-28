@@ -63,7 +63,7 @@ textarea:focus {
 }
 
 /* Scrollbar Classes For Google Chrome */
-html::-webkit-scrollbar {
+/* html::-webkit-scrollbar {
   width: 12px;
 }
 
@@ -74,4 +74,29 @@ html::-webkit-scrollbar-track {
 html::-webkit-scrollbar-thumb {
   background-color: var(--dark-color);
   border-radius: 15px;
+} */
+
+
+/* عرض الشريط */
+::-webkit-scrollbar {
+  width: 6px;          /* سكروول نحيف */
+}
+
+/* الخلفية السوداء */
+::-webkit-scrollbar-track {
+  background: #000;
+  border: 1px solid #b89564; 
+  border-radius: 10px;     /* خلفية سوداء */
+}
+
+/* المقبض الذهبي */
+::-webkit-scrollbar-thumb {
+  background: #b89564; /* لون ذهبي */
+  border-radius: 10px; 
+  border: 1px solid #b89564; /* حواف سوداء مثل اللي بالصورة */
+}
+
+/* عند المرور */
+::-webkit-scrollbar-thumb:hover {
+  background: #b89564;
 }
