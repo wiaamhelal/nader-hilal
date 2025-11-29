@@ -58,8 +58,8 @@ const Headerr = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/products2">
-                  Browse
+                <Link className="nav-link" to="/create-post">
+                  Create A Procuct
                 </Link>
               </li>
               <li className="nav-item">

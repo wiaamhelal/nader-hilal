@@ -100,3 +100,55 @@ html::-webkit-scrollbar-thumb {
 ::-webkit-scrollbar-thumb:hover {
   background: #b89564;
 }
+
+input::placeholder,
+textarea::placeholder {
+  color: #b89564;   /* ضع اللون الذي تريده */
+  opacity: 0.5;       /* مهم عشان بعض المتصفحات تقلل الوضوح */
+}
+
+
+/* ===== Global Professional Checkbox Style ===== */
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #b89564;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.25s ease;
+  outline: none;
+}
+
+/* عند التحديد */
+input[type="checkbox"]:checked {
+  background-color: #b89564;
+  border-color: #b89564;
+  box-shadow: 0 0 8px rgba(184, 149, 100, 0.4);
+}
+
+/* علامة الصح */
+input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* تحسينات عند الهوفر */
+input[type="checkbox"]:hover {
+  border-color: #a38252;
+}
+
+/* عند التركيز */
+input[type="checkbox"]:focus-visible {
+  outline: 2px solid rgba(184, 149, 100, 0.5);
+  outline-offset: 2px;
+}

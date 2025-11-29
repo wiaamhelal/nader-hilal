@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import { Route, Routes } from "react-router-dom";
 import ProductPage from "./components/ProductPage";
 import styled from "styled-components";
+import CreatePost from "../src/components/CreatePost";
 
 const App = () => {
   return (
@@ -32,6 +33,15 @@ const App = () => {
             <>
               <Header />
               <ProductPage />
+            </>
+          }
+        />
+        <Route
+          path="/create-post"
+          element={
+            <>
+              <Header />
+              <CreatePost />
             </>
           }
         />

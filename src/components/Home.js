@@ -114,6 +114,7 @@ const Main = styled.div`
     justify-content: center;
     margin-top: 60px;
     width: 100%;
+    box-shadow: 0px -6px 70px 0px rgba(184, 149, 100, 0.45);
   }
 
   .active-tab {
@@ -134,11 +135,14 @@ const Main = styled.div`
     gap: 20px;
 
     .child {
-      border: 1px solid #b89564;
+      // border: 1px solid #b89564;
       padding: 1rem;
+      box-shadow: 0px -6px 22px 0px rgba(184, 149, 100, 0.45);
+      border-radius: 10px;
 
       img {
         max-width: 100%;
+        border-radius: 10px;
       }
 
       p {
