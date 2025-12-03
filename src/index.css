@@ -152,3 +152,37 @@ input[type="checkbox"]:focus-visible {
   outline: 2px solid rgba(184, 149, 100, 0.5);
   outline-offset: 2px;
 }
+
+
+/* يخفي شكل الزر الأصلي */
+input[type="file"] {
+  color: #b89564;
+  opacity: 0.8;
+  /* margin-left: 10px; */
+}
+
+/* تنسيق الزر */
+input[type="file"]::file-selector-button {
+  background-color: #b89564;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+/* تأثير عند المرور */
+input[type="file"]::file-selector-button:hover {
+  background-color: #a78555;
+}
+
+/* صندوق الإدخال */
+input[type="file"] {
+  border: 1px solid #b89564;
+  padding: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}

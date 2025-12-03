@@ -19,55 +19,40 @@ const CreatePost = () => {
   const [desc, setdesc] = useState("");
   // const [category, setcategory] = useState("");
   const [selectedOption, setSelectedOption] = useState(null);
-  const [file, setfile] = useState("");
-  const [file2, setfile2] = useState("");
-  const [file3, setfile3] = useState("");
-  const [file4, setfile4] = useState("");
-  const [file5, setfile5] = useState("");
   const [productDetails, setproductDetails] = useState("");
   const [color, setcolor] = useState("");
   const [colors, setcolors] = useState([]);
-  const [premium, setPremium] = useState(false);
+  const [cate, setcate] = useState("");
 
   useEffect(() => {
     dispatch(fitchAllCategories());
   }, []);
-  const chosenCategory = categories.filter(
-    (item) => item?.branchTitle == selectedOption?.value
-  );
-  const submitColor = (e) => {
-    e.preventDefault();
-    setcolors([...colors, color]);
-    setcolor("");
-  };
-
+  // const chosenCategory = categories.filter(
+  //   (item) => item?.branchTitle == selectedOption?.value
+  // );
+  // const submitColor = (e) => {
+  //   e.preventDefault();
+  //   setcolors([...colors, color]);
+  //   setcolor("");
+  // };
+  const [files, setfiles] = useState([]);
   const submitCreatepost = (e) => {
     e.preventDefault();
     const formData = new FormData();
-
-    // Add multiple images
-    const files = [file, file2, file3, file4, file5]; // قائمة الملفات
-    files.forEach((file) => {
-      formData.append("images", file); // تأكد أن الاسم "images" مطابق للـ multer.array()
+    files.forEach((img) => {
+      formData.append("images", img);
     });
 
     // Add additional fields
     formData.append("description", desc);
-    formData.append("premium", premium);
     formData.append("title", title);
-    formData.append("price", price);
-    formData.append("category", selectedOption?.value);
-    formData.append("productDetails", productDetails);
-    formData.append("mainCategory", chosenCategory[0]?.mainTitle);
-    colors.forEach((color) => {
-      formData.append("colors", color); // تأكد أن الاسم "images" مطابق للـ multer.array()
-    });
+    formData.append("category", cate);
     dispatch(createNewPost(formData));
   };
 
   useEffect(() => {
     if (isPostCreated === true) {
-      navicate("/products");
+      navicate("/");
     }
   }, [isPostCreated, navicate]);
 
@@ -77,34 +62,17 @@ const CreatePost = () => {
         label: item?.branchTitle,
       }))
     : [];
-  const sizeOptions = [
-    {
-      value: "small",
-      label: "small",
-    },
-    {
-      value: "medium",
-      label: "medium",
-    },
-    {
-      value: "large",
-      label: "large",
-    },
-    {
-      value: "X large",
-      label: "X large",
-    },
-    {
-      value: "XX large",
-      label: "XX large",
-    },
-    {
-      value: "XXX large",
-      label: "XXX large",
-    },
-  ];
+
   const AvailableSizes = ["One Room", "Hall Apartment"];
 
+  const handleCheck = (value) => {
+    if (cate === value) {
+      setcate(null); // إلغاء التحديد إذا ضغط نفس الخيار
+    } else {
+      setcate(value); // تحديد الخيار المختار
+    }
+  };
+  console.log(files);
   return (
     <Holder className="container">
       <Main>
@@ -116,53 +84,16 @@ const CreatePost = () => {
             placeholder="product title"
             onChange={(e) => settitle(e.target.value)}
           />
-          {/* <input
-            className="inputs"
-            type="number"
-            placeholder="procuct price"
-            onChange={(e) => setprice(e.target.value)}
-          /> */}
-          {/* <select
-            className="inputs"
-            onChange={(e) => setcolors(e.target.value)}
-          >
-            <option value="none">category</option>
-            {categories.map((item) => (
-              <option value={item?.branchTitle}>{item?.branchTitle}</option>
-            ))}
-          </select> */}
-          {/* <SelectWithSearch /> */}
-          {/* <div className="w-64 mx-auto mt-10 mb-2">
-            <Select
-              options={options}
-              value={selectedOption}
-              onChange={setSelectedOption}
-              placeholder="Chose a category"
-              isSearchable
-            />
-          </div> */}
-
           <div className="d-flex align-items-center justify-content-between mb-3 mt-3 product-contain">
             {/* <span>Product Contain:</span> */}
             {AvailableSizes.map((item) => (
               <div className="d-flex align-items-center">
-                {/* <input
-                  type="checkbox"
-                  id={item}
-                  className="me-2"
-                  onChange={() => setcolors(colors.push(item))}
-                /> */}
                 <input
-                  type="checkbox"
                   id={item}
                   className="me-2"
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      setcolors([...colors, item]); // إضافة
-                    } else {
-                      setcolors(colors.filter((color) => color !== item)); // إزالة
-                    }
-                  }}
+                  type="checkbox"
+                  checked={cate === item}
+                  onChange={() => handleCheck(item)}
                 />
                 <label
                   htmlFor={item}
@@ -174,186 +105,38 @@ const CreatePost = () => {
               </div>
             ))}
           </div>
-          {/* <div className="d-flex align-items-center mb-3">
-            <input
-              className="inputs m-0"
-              type="text"
-              placeholder="inter the product colors (add them one by one)"
-              onChange={(e) => setcolor(e.target.value)}
-              value={color}
-            />
-            <button
-              style={{ width: "117px" }}
-              className="btn btn-success btn-sm rouded-pill ms-3"
-              onClick={submitColor}
-            >
-              ad
-            </button>
-          </div>
-          <div>
-            {colors?.map((item, index) => (
-              <span className="me-3">
-                <span>{index + 1}- </span>
-                <span>{item}</span>
-              </span>
-            ))}
-          </div> */}
-          {/* <div className="w-64 mx-auto mt-10 mb-2">
-            <Select
-              options={sizeOptions}
-              value={colors}
-              onChange={setcolors}
-              placeholder="Chose Sizes"
-              isSearchable
-            />
-          </div> */}
-          {/* <div className="d-flex align-items-center mb-3">
-            <input
-              type="checkbox"
-              id="premium"
-              className="me-2"
-              onChange={() => setPremium(!premium)}
-            />
-            <label htmlFor="premium" className="" style={{ cursor: "pointer" }}>
-              Premium Procuct
-            </label>
-          </div> */}
-
           <textarea
             onChange={(e) => setdesc(e.target.value)}
             className="inputs"
             placeholder="post description"
             rows={5}
           />
-          <textarea
+          {/* <textarea
             onChange={(e) => setproductDetails(e.target.value)}
             className="inputs"
             placeholder="Product details"
             rows={5}
-          />
-          <input
+          /> */}
+          {/* <input
             type="file"
+            multiple
+            accept="image/*"
             name="file"
             id="file"
-            className="d-none"
             onChange={(e) => setfile(e.target.files[0])}
-          />
-          <label htmlFor="file" className="btn btn-success w-100 mb-3 mt-1">
-            Chose an image
-          </label>
-          <div>
-            {file && (
-              <img
-                style={{
-                  width: "100%",
-                  maxHeight: "250px",
-                  borderRadius: "10px",
-                }}
-                className="mb-3"
-                alt=""
-                src={URL.createObjectURL(file)}
-              />
-            )}
-          </div>
+          /> */}
           <input
             type="file"
-            name="file2"
-            id="file2"
-            className="d-none"
-            onChange={(e) => setfile2(e.target.files[0])}
+            multiple
+            accept="image/*"
+            name="file"
+            id="file"
+            onChange={(e) => setfiles([...e.target.files])}
           />
-          <label htmlFor="file2" className="btn btn-success w-100 mb-3 mt-1">
-            Chose an image2
-          </label>
-          <div>
-            {file2 && (
-              <img
-                style={{
-                  width: "100%",
-                  maxHeight: "250px",
-                  borderRadius: "10px",
-                }}
-                className="mb-3"
-                alt=""
-                src={URL.createObjectURL(file2)}
-              />
-            )}
-          </div>
-          <input
-            type="file"
-            name="file3"
-            id="file3"
-            className="d-none"
-            onChange={(e) => setfile3(e.target.files[0])}
-          />
-          <label htmlFor="file3" className="btn btn-success w-100 mb-3 mt-1">
-            Chose an image3
-          </label>
-          <div>
-            {file3 && (
-              <img
-                style={{
-                  width: "100%",
-                  maxHeight: "250px",
-                  borderRadius: "10px",
-                }}
-                className="mb-3"
-                alt=""
-                src={URL.createObjectURL(file3)}
-              />
-            )}
-          </div>
-          <input
-            type="file"
-            name="file4"
-            id="file4"
-            className="d-none"
-            onChange={(e) => setfile4(e.target.files[0])}
-          />
-          <label htmlFor="file4" className="btn btn-success w-100 mb-3 mt-1">
-            Chose an image4
-          </label>
-          <div>
-            {file4 && (
-              <img
-                style={{
-                  width: "100%",
-                  maxHeight: "250px",
-                  borderRadius: "10px",
-                }}
-                className="mb-3"
-                alt=""
-                src={URL.createObjectURL(file4)}
-              />
-            )}
-          </div>
-          <input
-            type="file"
-            name="file5"
-            id="file5"
-            className="d-none"
-            onChange={(e) => setfile5(e.target.files[0])}
-          />
-          <label htmlFor="file5" className="btn btn-success w-100 mb-3 mt-1">
-            Chose an image5
-          </label>
-          <div>
-            {file5 && (
-              <img
-                style={{
-                  width: "100%",
-                  maxHeight: "250px",
-                  borderRadius: "10px",
-                }}
-                className="mb-3"
-                alt=""
-                src={URL.createObjectURL(file5)}
-              />
-            )}
-          </div>
+
           <div className="">
             {loading ? (
-              <button className="btn btn-success w-100 p-0">
+              <button className="btn my-botton w-100 p-0 text-whtie color-white">
                 {" "}
                 <RotatingLines
                   visible={true}
@@ -368,7 +151,7 @@ const CreatePost = () => {
                 />
               </button>
             ) : (
-              <button className="btn btn-primary w-100">
+              <button className="btn my-botton w-100">
                 Create The Product
               </button>
             )}
@@ -380,6 +163,7 @@ const CreatePost = () => {
 };
 const Holder = styled.div`
   padding-top: 80px;
+  min-height: 100vh;
 `;
 const Main = styled.div`
   & h2 {
@@ -410,6 +194,7 @@ const Main = styled.div`
     resize: none;
     margin-bottom: 10px;
     background: transparent;
+    color: white;
   }
   & .file {
     display: block;
@@ -417,6 +202,11 @@ const Main = styled.div`
   & .product-contain {
     color: #b89564;
     opacity: 0.9;
+  }
+
+  & .my-botton {
+    background-color: #b89564;
+    margin-top: 15px;
   }
 `;
 export default CreatePost;

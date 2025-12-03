@@ -6,4 +6,4 @@ const request = axios.create({
 export default request;
 
 //https://back-end-store-9vu0.onrender.com
-//
+//http://localhost:8000

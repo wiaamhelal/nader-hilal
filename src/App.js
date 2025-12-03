@@ -28,7 +28,7 @@ const App = () => {
           }
         />
         <Route
-          path="/product-page"
+          path="/product-page/:id"
           element={
             <>
               <Header />

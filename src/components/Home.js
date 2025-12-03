@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import Headerr from "./Header";
 import { useNavigate } from "react-router-dom";
+import PostList from "./PostList";
 const Home = () => {
   const navicate = useNavigate();
   const tabs = [
@@ -39,8 +40,9 @@ const Home = () => {
             </span>
           ))}
         </div>
-        <div className="holder">
-          <div className="child" onClick={() => navicate(`/product-page`)}>
+        <div className="">
+          <PostList />
+          {/* <div className="child" onClick={() => navicate(`/product-page`)}>
             <img
               src="https://res.cloudinary.com/dw4e01qx8/f_auto,q_auto/images/psc16ewfoqsaehk8hp2u"
               alt=""
@@ -69,7 +71,7 @@ const Home = () => {
               Ultra-exclusive luxury residence interior design in Doha – Villa
               Project
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </Main>
@@ -127,12 +129,7 @@ const Main = styled.div`
     margin-bottom: 3px;
   }
 
-  .holder {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    margin-top: 40px;
-    gap: 20px;
+
 
     .child {
       // border: 1px solid #b89564;

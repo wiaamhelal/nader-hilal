@@ -51,6 +51,25 @@ export function fetchPostsByCategory(category) {
 }
 
 // get post by the category
+// export function createNewPost(newPost) {
+//   return async (dispatch, getState) => {
+//     try {
+//       dispatch(postActions.setLoading(true));
+//       await request.post(`/api/posts`, newPost, {
+//         headers: {
+//           Authorization: "Bearer " + getState().auth.user.token,
+//           "Content-Type": "multipart/form-data",
+//         },
+//       });
+//       dispatch(postActions.setIsPostCreated());
+//       setTimeout(() => dispatch(postActions.falseIsPostCreated()), 2000);
+//     } catch (error) {
+//       toast.error(error.response.data.message);
+//       dispatch(postActions.setLoading(false));
+//     }
+//   };
+// }
+
 export function createNewPost(newPost) {
   return async (dispatch, getState) => {
     try {
@@ -58,13 +77,13 @@ export function createNewPost(newPost) {
       await request.post(`/api/posts`, newPost, {
         headers: {
           Authorization: "Bearer " + getState().auth.user.token,
-          "Content-Type": "multipart/form-data",
+          // ❌ لا تضف Content-Type هنا
         },
       });
       dispatch(postActions.setIsPostCreated());
       setTimeout(() => dispatch(postActions.falseIsPostCreated()), 2000);
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || "Error");
       dispatch(postActions.setLoading(false));
     }
   };
