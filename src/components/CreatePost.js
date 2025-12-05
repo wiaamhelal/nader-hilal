@@ -136,7 +136,7 @@ const CreatePost = () => {
 
           <div className="">
             {loading ? (
-              <button className="btn my-botton w-100 p-0 text-whtie color-white">
+              <button className="btn my-botton w-100 p-0 text-white color-white">
                 {" "}
                 <RotatingLines
                   visible={true}
@@ -148,6 +148,7 @@ const CreatePost = () => {
                   ariaLabel="rotating-lines-loading"
                   wrapperStyle={{}}
                   wrapperClass=""
+                  className="text-white"
                 />
               </button>
             ) : (

@@ -8,7 +8,7 @@ import {
 } from "../redux/apiCalls/postApiCall";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-const PostList = () => {
+const PostList = ({ activeTab }) => {
   const { posts, search, maxPosts } = useSelector((state) => state.post);
   const { postsCount } = useSelector((state) => state.post);
   const dispatch = useDispatch();
@@ -25,24 +25,24 @@ const PostList = () => {
   useEffect(() => {
     dispatch(getPostsCount());
   }, [getPostsCount]);
+
+  const filteredProducts =
+    activeTab === "all" ? posts : posts.filter((p) => p.category === activeTab);
   console.log(posts);
   return (
     <Holder>
       <div className="">
         <div className="holder">
-          {posts?.map((item) => (
-            // <PostItem post={item} key={item?._id} />
-            <div
-              className="child"
-              onClick={() => navicate(`/product-page/${item?._id}`)}
-            >
-              <img src={item?.images[0].url} alt="" />
-              <p>
-                Ultra-exclusive luxury residence interior design in Doha – Villa
-                Project
-              </p>
-            </div>
-          ))}
+          {Array.isArray(filteredProducts) &&
+            filteredProducts?.map((item) => (
+              <div
+                className="child"
+                onClick={() => navicate(`/product-page/${item?._id}`)}
+              >
+                <img src={item?.images[0].url} alt="" />
+                <p>{item?.title}</p>
+              </div>
+            ))}
         </div>
 
         <div className="col-12 mt-3">

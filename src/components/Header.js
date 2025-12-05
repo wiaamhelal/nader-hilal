@@ -14,6 +14,11 @@ import instgram from "../img/instagram-svgrepo-com.svg";
 import language from "../img/earth-8-svgrepo-com.svg";
 const Headerr = () => {
   const dispatch = useDispatch();
+  const navicate = useNavigate();
+  const closeMenu = () => {
+    const menu = document.getElementById("navbarSupportedContent");
+    menu.classList.remove("show");
+  };
   return (
     <Main>
       <div className="contacnt">
@@ -35,7 +40,12 @@ const Headerr = () => {
         style={{ background: "#171717" }}
       >
         <div className="container-fluid">
-          <img className="logo-img" src={Logo} alt="" />
+          <img
+            className="logo-img"
+            src={Logo}
+            alt=""
+            onClick={() => navicate("/")}
+          />
 
           <button
             className="navbar-toggler"
@@ -53,17 +63,21 @@ const Headerr = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link active" to="/">
+                <Link className="nav-link active" onClick={closeMenu} to="/">
                   Home
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/create-post">
+                <Link
+                  className="nav-link"
+                  onClick={closeMenu}
+                  to="/create-post"
+                >
                   Create A Procuct
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/contactus">
+                <Link className="nav-link" onClick={closeMenu} to="/contactus">
                   Contact Us
                 </Link>
               </li>

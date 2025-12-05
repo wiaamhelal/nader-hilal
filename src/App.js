@@ -5,7 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import ProductPage from "./components/ProductPage";
 import styled from "styled-components";
 import CreatePost from "../src/components/CreatePost";
-
+import whatsap from "./img/whatsapp-svgrepo-com.svg";
 const App = () => {
   return (
     <Main
@@ -17,6 +17,9 @@ const App = () => {
         backgroundRepeat: "repeat",
       }}
     >
+      <div className="w-contact">
+        <img src={whatsap} alt="" />
+      </div>
       <Routes>
         <Route
           path="/"
@@ -52,6 +55,25 @@ const App = () => {
 const Main = styled.div`
   @media (max-width: 668px) {
     background-size: 320%;
+  }
+
+  & .w-contact {
+    position: fixed;
+    top: 50%;
+    right: -35px;
+    transform: translateY(-50%);
+    color: white;
+    border: 1px solid #b89564;
+    background: #333333;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding-left: 7px;
+    & img {
+      width: 25px;
+    }
   }
 `;
 export default App;

@@ -8,49 +8,53 @@ const Paganation = ({ pages, setcurrentPage, currentPage }) => {
   }
 
   return (
-    <nav aria-label="..." className="d-flex justify-content-center">
-      <ul class="pagination">
-        <button
-          class="page-item btn p-0"
-          disabled={currentPage === 1}
-          onClick={() => setcurrentPage((currentPage += -1))}
+    <Main aria-label="..." className="">
+      <button
+        class="btn p-0"
+        disabled={currentPage === 1}
+        onClick={() => setcurrentPage((currentPage += -1))}
+      >
+        <a class="" href="#" tabindex="-1" aria-disabled="true">
+          Previous
+        </a>
+      </button>
+      {generatedPages.map((page) => (
+        <li
+          onClick={() => setcurrentPage(page)}
+          key={page}
+          class=""
+          aria-current="page"
         >
-          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
-            Previous
+          <a class="" href="#">
+            {" "}
+            {page}
           </a>
-        </button>
-        {generatedPages.map((page) => (
-          <li
-            onClick={() => setcurrentPage(page)}
-            key={page}
-            class="page-item"
-            aria-current="page"
-          >
-            <a class="page-link" href="#">
-              {" "}
-              {page}
-            </a>
-          </li>
-        ))}
-        <button
-          class="page-item btn p-0"
-          onClick={() => setcurrentPage((currentPage += 1))}
-          disabled={currentPage === generatedPages.length}
-        >
-          <a class="page-link" href="#">
-            Next
-          </a>
-        </button>
-      </ul>
-    </nav>
+        </li>
+      ))}
+      <button
+        class="page-item btn p-0"
+        onClick={() => setcurrentPage((currentPage += 1))}
+        disabled={currentPage === generatedPages.length}
+      >
+        <a class="" href="#">
+          Next
+        </a>
+      </button>
+    </Main>
   );
 };
 const Main = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 300px;
+  width: fit-content;
   margin: auto;
+  border: 1px solid #b89564;
+  border-radius: 5px;
+  gap: 11px;
+  padding: 5px;
+  & a {
+    color: #b89564;
+  }
 `;
 const Previous = styled.div``;
 const Number = styled.div``;

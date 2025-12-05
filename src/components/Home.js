@@ -8,26 +8,17 @@ const Home = () => {
   const navicate = useNavigate();
   const tabs = [
     { id: "all", label: "REVIEW ALL" },
-    { id: "project", label: "REVIEW BY PROJECT" },
-    { id: "category", label: "REVIEW BY CATEGORY" },
+    { id: "Hall Apartment", label: "REVIEW BY PROJECT" },
+    { id: "One Room", label: "REVIEW BY CATEGORY" },
   ];
 
   const [activeTab, setActiveTab] = useState("all");
   return (
-    <Main
-    // className="pt-40 bg-neutral-1000"
-    >
+    <Main>
       <div className="container">
-        {/* <span>Home Page | Interior Design Work</span> */}
         <h2 className="fw-bold text-golden text-center mt-5 pt-5">
           OUR DESIGN WORK
         </h2>
-        {/* <div class="d-flex flex-wrap flex-sm-nowrap justify-content-between mt-5 pt-4 group-bottons">
-          <span className="">REVIEW ALL</span>
-          <span class="">REVIEW BY PROJECT</span>
-
-          <span class=" ">REVIEW BY CATEGORY</span>
-        </div> */}
         <div className="cate-title">Interior Design Work</div>
         <div className="d-flex flex-wrap flex-sm-nowrap justify-content-between pt-4 group-bottons">
           {tabs.map((tab) => (
@@ -41,37 +32,7 @@ const Home = () => {
           ))}
         </div>
         <div className="">
-          <PostList />
-          {/* <div className="child" onClick={() => navicate(`/product-page`)}>
-            <img
-              src="https://res.cloudinary.com/dw4e01qx8/f_auto,q_auto/images/psc16ewfoqsaehk8hp2u"
-              alt=""
-            />
-            <p>
-              Ultra-exclusive luxury residence interior design in Doha – Villa
-              Project
-            </p>
-          </div>
-          <div className="child">
-            <img
-              src="https://res.cloudinary.com/dw4e01qx8/f_auto,q_auto/images/psc16ewfoqsaehk8hp2u"
-              alt=""
-            />
-            <p>
-              Ultra-exclusive luxury residence interior design in Doha – Villa
-              Project
-            </p>
-          </div>
-          <div className="child">
-            <img
-              src="https://res.cloudinary.com/dw4e01qx8/f_auto,q_auto/images/psc16ewfoqsaehk8hp2u"
-              alt=""
-            />
-            <p>
-              Ultra-exclusive luxury residence interior design in Doha – Villa
-              Project
-            </p>
-          </div> */}
+          <PostList activeTab={activeTab} />
         </div>
       </div>
     </Main>

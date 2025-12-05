@@ -1,18 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { fetchSinglePost } from "../redux/apiCalls/postApiCall";
+import { deletePostApi, fetchSinglePost } from "../redux/apiCalls/postApiCall";
+import swal from "sweetalert";
 const ProductPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navicate = useNavigate();
   const { post } = useSelector((state) => state.post);
   console.log(post);
 
   useEffect(() => {
     dispatch(fetchSinglePost(id));
   }, [id]);
-
+  const [zoomImage, setZoomImage] = useState(null);
+  const deleteProduct = () => {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this imaginary post!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        dispatch(deletePostApi(post?._id));
+        navicate(`/`);
+        // window.location.reload(false);
+      }
+    });
+  };
   return (
     <Main className="container">
       <div className=" mt-5 pt-4 pb-4">
@@ -30,11 +47,38 @@ const ProductPage = () => {
           </div>
         </div>
       </div>
-      <div className="img-container">
+      {/* <div className="img-container">
         {post?.images.map((item) => (
           <img src={item?.url} alt="" />
         ))}
-      </div>
+      </div> */}
+
+      <>
+        <div className="img-container">
+          {post?.images.map((item, index) => (
+            <img
+              key={index}
+              src={item?.url}
+              alt=""
+              onClick={() => setZoomImage(item?.url)}
+              style={{ cursor: "pointer" }}
+            />
+          ))}
+        </div>
+
+        {/* Modal لعرض الصورة */}
+        {zoomImage && (
+          <div
+            className="image-modal-overlay"
+            onClick={() => setZoomImage(null)}
+          >
+            <img src={zoomImage} className="image-modal" alt="" />
+          </div>
+        )}
+      </>
+      <botton className="delete-btn" onClick={deleteProduct}>
+        Delete Product
+      </botton>
     </Main>
   );
 };
@@ -57,6 +101,7 @@ const Main = styled.div`
     & .title {
       color: #b89564;
       margin-bottom: 15px;
+      margin-top: 15px;
     }
     & .desc {
       color: rgb(205 192 177);
@@ -78,6 +123,17 @@ const Main = styled.div`
       max-width: 100%;
       border: 1px solid #b89564;
     }
+  }
+  & .delete-btn {
+    padding: 5px;
+    color: #b89564;
+    border: 1px solid #b89564;
+    border-radius: 6px;
+    display: flex;
+    width: fit-content;
+    margin: auto;
+    margin-top: 10px;
+    cursor: pointer;
   }
 `;
 export default ProductPage;
