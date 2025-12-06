@@ -1,12 +1,13 @@
 import React from "react";
 import Home from "./components/Home";
 import Header from "./components/Header";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import ProductPage from "./components/ProductPage";
 import styled from "styled-components";
 import CreatePost from "../src/components/CreatePost";
 import whatsap from "./img/whatsapp-svgrepo-com.svg";
 const App = () => {
+  const navicate = useNavigate();
   return (
     <Main
       style={{
@@ -17,9 +18,9 @@ const App = () => {
         backgroundRepeat: "repeat",
       }}
     >
-      <div className="w-contact">
+      <a className="w-contact" href="https://wa.me/+963938353816">
         <img src={whatsap} alt="" />
-      </div>
+      </a>
       <Routes>
         <Route
           path="/"
@@ -73,6 +74,7 @@ const Main = styled.div`
     padding-left: 7px;
     & img {
       width: 25px;
+      height: 25px;
     }
   }
 `;

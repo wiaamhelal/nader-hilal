@@ -23,12 +23,23 @@ const Headerr = () => {
     <Main>
       <div className="contacnt">
         <div className="box">
-          <img src={focebook} alt="" />
-          <img src={linkedien} alt="" />
-          <img src={instgram} alt="" />
-          <img src={phone} alt="" />
-          <img src={whatsap} alt="" />
-
+          <a href="https://www.facebook.com/naderhilalo">
+            {" "}
+            <img src={focebook} alt="" />
+          </a>
+          <a href="https://ae.linkedin.com/in/nader-hilal">
+            <img src={linkedien} alt="" />
+          </a>
+          <a href="https://www.instagram.com/nader.hilal/">
+            <img src={instgram} alt="" />
+          </a>
+          <a href="tel:+971547330801">
+            {" "}
+            <img src={phone} alt="" />
+          </a>
+          <a className="w-contact" href="https://wa.me/+963938353816">
+            <img src={whatsap} alt="" />
+          </a>
           <div className="d-flex align-items-center">
             <span className="distin">|</span>
             <img src={language} alt="" /> <span className="lang">EN AR</span>
@@ -159,6 +170,11 @@ const Main = styled.div`
   //   z-index: 99999;
   //   top: 0;
   //   // opacity: 0.9;
+  // }
+  // & .distin {
+  //   display: flex;
+  //   margin-right: 5px;
+  //   margin-bottom: 3px;
   // }
 `;
 const Basket = styled.div`
