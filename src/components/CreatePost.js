@@ -174,7 +174,6 @@ const Main = styled.div`
   margin: auto;
   // background: white;
   box-shadow: 0px -6px 22px 0px rgba(184, 149, 100, 0.45);
-
   padding: 10px;
   border-radius: 10px;
   & .inputs {

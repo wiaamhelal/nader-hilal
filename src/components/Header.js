@@ -15,51 +15,59 @@ import language from "../img/earth-8-svgrepo-com.svg";
 const Headerr = () => {
   const dispatch = useDispatch();
   const navicate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
   const closeMenu = () => {
     const menu = document.getElementById("navbarSupportedContent");
     menu.classList.remove("show");
   };
   return (
     <Main>
-      <div className="contacnt">
-        <div className="box">
-          <a href="https://www.facebook.com/naderhilalo">
-            {" "}
-            <img src={focebook} alt="" />
-          </a>
-          <a href="https://ae.linkedin.com/in/nader-hilal">
-            <img src={linkedien} alt="" />
-          </a>
-          <a href="https://www.instagram.com/nader.hilal/">
-            <img src={instgram} alt="" />
-          </a>
-          <a href="tel:+971547330801">
-            {" "}
-            <img src={phone} alt="" />
-          </a>
-          <a className="w-contact" href="https://wa.me/+963938353816">
-            <img src={whatsap} alt="" />
-          </a>
-          <div className="d-flex align-items-center">
-            <span className="distin">|</span>
-            <img src={language} alt="" /> <span className="lang">EN AR</span>
-          </div>
-        </div>
+      {/* <div className="contacnt">
+    <div className="box">
+      <a href="https://www.facebook.com/naderhilalo">
+        <img src={focebook} alt="" />
+      </a>
+
+      <a href="https://ae.linkedin.com/in/nader-hilal">
+        <img src={linkedien} alt="" />
+      </a>
+
+      <a href="https://www.instagram.com/nader.hilal/">
+        <img src={instgram} alt="" />
+      </a>
+
+      <a href="tel:+971547330801">
+        <img src={phone} alt="" />
+      </a>
+
+      <a className="w-contact" href="https://wa.me/+963938353816">
+        <img src={whatsap} alt="" />
+      </a>
+
+      <div className="d-flex align-items-center">
+        <span className="distin">|</span>
+        <img src={language} alt="" />
+        <span className="lang">EN AR</span>
       </div>
+    </div>
+  </div> */}
+
       <nav
         className="navbar navbar-expand-lg navbar-dark my-nav"
         style={{ background: "#171717" }}
       >
         <div className="container-fluid">
-          <img
-            className="logo-img"
-            src={Logo}
-            alt=""
-            onClick={() => navicate("/")}
-          />
+          {/* LOGO */}
+          {/* <img
+        className="logo-img"
+        src={Logo}
+        alt=""
+        onClick={() => navigate("/")}
+      /> */}
 
+          {/* TOGGLE BUTTON */}
           <button
-            className="navbar-toggler"
+            className="navbar-toggler ms-auto"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -67,32 +75,50 @@ const Headerr = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            {/* <span className="navbar-toggler-icon"></span> */}
-            <img className=" toggle-img" src={menuToggle} alt="" />
+            <img className="toggle-img" src={menuToggle} alt="" />
           </button>
 
+          {/* NAVBAR CONTENT */}
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            {/* NAV LINKS */}
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <Link className="nav-link active" onClick={closeMenu} to="/">
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link"
-                  onClick={closeMenu}
-                  to="/create-post"
-                >
-                  Create A Procuct
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" onClick={closeMenu} to="/contactus">
-                  Contact Us
+                  Trending Movies
                 </Link>
               </li>
 
+              {user && (
+                <li className="nav-item">
+                  <Link
+                    className="nav-link"
+                    onClick={closeMenu}
+                    to="/create-post"
+                  >
+                    Popular Movies
+                  </Link>
+                </li>
+              )}
+
+              <li className="nav-item">
+                <Link className="nav-link" onClick={closeMenu} to="/about">
+                  Top Rated
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link className="nav-link" onClick={closeMenu} to="/about">
+                  Upcoming
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link className="nav-link" onClick={closeMenu} to="/about">
+                  TV Shows
+                </Link>
+              </li>
+
+              {/* LANGUAGE DROPDOWN */}
               <li className="nav-item dropdown">
                 <Link
                   className="nav-link dropdown-toggle"
@@ -101,14 +127,10 @@ const Headerr = () => {
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
-                  // <Link
-                  //   className="nav-link"
-                  //   to="/contactus"
-                  //   tabIndex="-1"
-                  //   aria-disabled="true"
                 >
                   Language
                 </Link>
+
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
                     <LanguageSwitcher />
@@ -117,6 +139,20 @@ const Headerr = () => {
                 </ul>
               </li>
             </ul>
+
+            {/* SEARCH FORM */}
+            <form className="d-flex ms-lg-3 mt-3 mt-lg-0">
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+
+              <button className="btn my-botton" type="submit">
+                Search
+              </button>
+            </form>
           </div>
         </div>
       </nav>
@@ -124,7 +160,7 @@ const Headerr = () => {
   );
 };
 const Main = styled.div`
-  height: 96px;
+  // height: 96px;
   background-color: #171717;
   margin-top: -1px;
 
@@ -176,28 +212,44 @@ const Main = styled.div`
   //   margin-right: 5px;
   //   margin-bottom: 3px;
   // }
-`;
-const Basket = styled.div`
-  position: relative;
-  width: fit-content;
-  cursor: pointer;
-  & span {
-    position: absolute;
-    bottom: -3px;
-    right: -4px;
-    color: white;
-    background-color: red;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  & .my-botton {
+    --bs-btn-color: #b89564;
+    --bs-btn-border-color: #b89564;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #b89564;
+    --bs-btn-hover-border-color: #b89564;
+    --bs-btn-focus-shadow-rgb: 25, 135, 84;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #b89564;
+    --bs-btn-active-border-color: #b89564;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #b89564;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #b89564;
+    --bs-gradient: none;
   }
-  // & img {
-  //   width: 30px;
-  //   margin-left: 5px;
-  //   margin-top: 5px;
-  // }
 `;
+// const Basket = styled.div`
+//   position: relative;
+//   width: fit-content;
+//   cursor: pointer;
+//   & span {
+//     position: absolute;
+//     bottom: -3px;
+//     right: -4px;
+//     color: white;
+//     background-color: red;
+//     width: 14px;
+//     height: 14px;
+//     border-radius: 50%;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//   }
+// & img {
+//   width: 30px;
+//   margin-left: 5px;
+//   margin-top: 5px;
+// }
+// `;
 export default Headerr;

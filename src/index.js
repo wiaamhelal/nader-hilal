@@ -10,6 +10,9 @@ import Store from "./redux/Store";
 
 // import "bootstrap/dist/css/bootstrap.min.css";
 // import "bootstrap/dist/js/bootstrap.js";
+// main.jsx أو index.js
+// import { loadStripe } from "@stripe/stripe-js";
+// import { Elements } from "@stripe/react-stripe-js";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

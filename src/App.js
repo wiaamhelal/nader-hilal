@@ -6,6 +6,9 @@ import ProductPage from "./components/ProductPage";
 import styled from "styled-components";
 import CreatePost from "../src/components/CreatePost";
 import whatsap from "./img/whatsapp-svgrepo-com.svg";
+import About from "./components/About";
+import Login from "./components/Login";
+
 const App = () => {
   const navicate = useNavigate();
   return (
@@ -46,6 +49,24 @@ const App = () => {
             <>
               <Header />
               <CreatePost />
+            </>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <>
+              <Header />
+              <About />
+            </>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <>
+              <Header />
+              <Login />
             </>
           }
         />

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://naderhilal.online/sitemap.xml
