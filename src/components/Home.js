@@ -7,26 +7,122 @@ import PostList from "./PostList";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../redux/apiCalls/authApiCall";
 import star from "../img/star-svgrepo-com (2).svg";
+import { postActions } from "../redux/slices/postSlice";
+import { fetchHomeData } from "../redux/slices/movieSlice";
 const Home = () => {
-  useEffect(() => {
-    fetch("http://localhost:8000/api/movies/trending")
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:8000/api/movies/trending")
+  //     .then((res) => res.json())
+  //     .then((data) => dispatch(postActions.setAllData(data)));
+  // }, []);
+
+  const {
+    trending,
+    popular,
+    topRated,
+    upcoming,
+    loading,
+    latestMovies,
+    latestTvShows,
+  } = useSelector((state) => state.movies);
+
+  console.log(latestMovies);
+  console.log(popular);
+  console.log(topRated);
+  console.log(upcoming);
 
   const navicate = useNavigate();
   const dispatch = useDispatch();
+
   const tabs = [
     { id: "all", label: "REVIEW ALL" },
     { id: "Hall Apartment", label: "REVIEW BY PROJECT" },
     { id: "One Room", label: "REVIEW BY CATEGORY" },
   ];
   const { user } = useSelector((state) => state.auth);
-  console.log(user);
+  const { alldata } = useSelector((state) => state.post);
+  console.log(alldata);
   const [activeTab, setActiveTab] = useState("all");
+  useEffect(() => {
+    dispatch(fetchHomeData());
+  }, [dispatch]);
+
+  if (loading) return <h1>Loading...</h1>;
   return (
     <Main>
       <div
+        id="carouselExampleControls"
+        className="carousel slide"
+        data-bs-ride="carousel"
+      >
+        <div className="carousel-inner" style={{ marginTop: "10px" }}>
+          {trending?.map((movie, index) => (
+            <div
+              key={movie.id}
+              className={`carousel-item ${
+                index === 0 ? "active" : ""
+              } position-relative`}
+              style={{ maxHeight: "600px" }}
+              onClick={() => navicate(`/movie/${movie.id}`)}
+            >
+              <img
+                className="d-block w-100"
+                src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+                alt={movie.title}
+              />
+
+              <div
+                className="movie-details"
+                style={{
+                  backdropFilter: "blur(10px)",
+                  WebkitBackdropFilter: "blur(10px)",
+                  background: "rgba(255,255,255,0.1)",
+                }}
+              >
+                <div className="head-div">
+                  <span className="rate">
+                    <img src={star} alt="*" />
+                    <span className="the-number">
+                      {movie.vote_average.toFixed(1)}
+                    </span>
+                  </span>
+
+                  <span className="year d-sm-none">{movie.title}</span>
+
+                  <span className="year">
+                    {movie.release_date?.split("-")[0]}
+                  </span>
+                </div>
+
+                <h2 className="d-none d-sm-block">{movie.title}</h2>
+
+                <p className="d-none d-sm-block">
+                  {movie.overview?.slice(0, 150)}...
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <button
+          className="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleControls"
+          data-bs-slide="prev"
+        >
+          <span className="carousel-control-prev-icon"></span>
+        </button>
+
+        <button
+          className="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleControls"
+          data-bs-slide="next"
+        >
+          <span className="carousel-control-next-icon"></span>
+        </button>
+      </div>
+      {/* <div
         id="carouselExampleControls"
         className="carousel slide"
         data-bs-ride="carousel"
@@ -157,8 +253,8 @@ const Home = () => {
         >
           <span className="carousel-control-next-icon"></span>
         </button>
-      </div>
-      <h4>Trending Now</h4>
+      </div> */}
+      {/* <h4>Trending Now</h4>
       <div className="my-slider">
         <div className="the-slide">
           <div className="box">
@@ -203,8 +299,59 @@ const Home = () => {
             </div>
           </div>
         </div>
+      </div> */}
+      <h4>Trending Now</h4>
+
+      <div className="my-slider">
+        <div className="the-slide">
+          {popular?.map((movie) => (
+            <div
+              className="box"
+              key={movie.id}
+              onClick={() => navicate(`/movie/${movie.id}`)}
+            >
+              <img
+                src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                alt={movie.title}
+              />
+
+              <div className="details">
+                <h3>{movie.title}</h3>
+
+                <p>{movie?.release_date}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
       <div className="latest-movies">
+        <h4>Latest Movies</h4>
+
+        <div className="movies-container row">
+          {topRated?.map((movie) => (
+            <div
+              key={movie.id}
+              className="box col-5 col-sm-4 col-md-2"
+              onClick={() => navicate(`/movie/${movie.id}`)}
+            >
+              <img
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt={movie.title}
+              />
+
+              <p className="time">{movie.release_date?.split("-")[0]}</p>
+
+              <p className="title">{movie.title}</p>
+
+              <div className="type-container">
+                <span>Movie</span>
+                <span>⭐ {movie.vote_average?.toFixed(1)}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* <div className="latest-movies">
         <h4>latest movies</h4>
         <div className="movies-container row">
           <div className="box col-5 col-sm-4 col-md-2">
@@ -268,7 +415,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* <div className="container">
         <h2 className="fw-bold text-golden text-center mt-5 pt-5">
           OUR DESIGN WORK
@@ -435,10 +582,11 @@ const Main = styled.div`
      & .my-slider {
      & .details {
     position: absolute;
-      top: 80px;
+         top: 180px;
     left: 10px;
      }
        overflow: auto;
+           overflow-y: hidden;
      & .the-slide {
      display: flex;
     align-items: center;
@@ -450,6 +598,7 @@ const Main = styled.div`
          position: relative;
       img {
           max-width: 300px;
+              max-height: 250px;
       }
       h3 {
   
@@ -481,6 +630,7 @@ const Main = styled.div`
       background: rgb(23, 23, 23);
     padding: 10px;
     border-radius: 10px;
+        width: 164.33px;
   img {
       max-width: 100%;
          height: 225px;

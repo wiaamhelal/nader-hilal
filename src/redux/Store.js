@@ -5,6 +5,7 @@ import { postReducer } from "./slices/postSlice";
 import { categoryReducer } from "./slices/categorySlice";
 import { commentReducer } from "./slices/commentSlice";
 import { passwordReducer } from "./slices/passwordSlice";
+import moviesReducer from "./slices/movieSlice";
 const Store = configureStore({
   reducer: {
     auth: authReducer,
@@ -13,6 +14,7 @@ const Store = configureStore({
     category: categoryReducer,
     comment: commentReducer,
     password: passwordReducer,
+    movies: moviesReducer,
   },
 });
 

@@ -25,6 +25,7 @@ const postSlice = createSlice({
     totalPrice: null,
     payment: "",
     ClosingOrders: [],
+    alldata: [],
   },
   reducers: {
     setPosts(state, action) {
@@ -121,6 +122,9 @@ const postSlice = createSlice({
     },
     setTotalPrice(state, action) {
       state.totalPrice = action.payload;
+    },
+    setAllData(state, action) {
+      state.alldata = action.payload;
     },
     // state.payment = action.payload;
     // state.allMaxOrders.map((item) =>
