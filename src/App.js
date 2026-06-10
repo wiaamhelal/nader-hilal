@@ -8,6 +8,8 @@ import CreatePost from "../src/components/CreatePost";
 import whatsap from "./img/whatsapp-svgrepo-com.svg";
 import About from "./components/About";
 import Login from "./components/Login";
+import MoviePage from "./components/MoviePage";
+import TvPage from "./components/TvPage";
 
 const App = () => {
   const navicate = useNavigate();
@@ -21,9 +23,9 @@ const App = () => {
         backgroundRepeat: "repeat",
       }}
     >
-      <a className="w-contact" href="https://wa.me/+963938353816">
+      {/* <a className="w-contact" href="https://wa.me/+963938353816">
         <img src={whatsap} alt="" />
-      </a>
+      </a> */}
       <Routes>
         <Route
           path="/"
@@ -34,12 +36,42 @@ const App = () => {
             </>
           }
         />
-        <Route
+        {/* <Route
           path="/movie/:id"
           element={
             <>
               <Header />
               <ProductPage />
+            </>
+          }
+        /> */}
+        {/* <Route
+          path="/:type/:id"
+          element={
+            <>
+              <Header />
+              <ProductPage />
+            </>
+          }
+        /> */}
+        {/* <Route path="/tv/:id" element={<ProductPage />} />
+        <Route path="/movie/:id" element={<ProductPage />} /> */}
+        <Route
+          path="/movie/:id"
+          element={
+            <>
+              <Header />
+              <MoviePage />
+            </>
+          }
+        />
+
+        <Route
+          path="/tv/:id"
+          element={
+            <>
+              <Header />
+              <TvPage />
             </>
           }
         />

@@ -24,9 +24,10 @@ const Home = () => {
     loading,
     latestMovies,
     latestTvShows,
+    TopRatedTvShows,
   } = useSelector((state) => state.movies);
 
-  console.log(latestMovies);
+  console.log(TopRatedTvShows);
   console.log(popular);
   console.log(topRated);
   console.log(upcoming);
@@ -122,184 +123,6 @@ const Home = () => {
           <span className="carousel-control-next-icon"></span>
         </button>
       </div>
-      {/* <div
-        id="carouselExampleControls"
-        className="carousel slide"
-        data-bs-ride="carousel"
-      >
-        <div className="carousel-inner" style={{ marginTop: "10px" }}>
-          <div
-            className="carousel-item active position-relative"
-            style={{ maxHeight: "600px" }}
-          >
-            <img
-              className="d-block w-100"
-              src="https://image.tmdb.org/t/p/original/e9UvRjJAqn2hLXDfMHU1LFMEKGv.jpg"
-              alt="First slide"
-            />
-
-            <div
-              className="movie-details"
-              style={{
-                backdropFilter: "blur(10px)",
-                WebkitBackdropFilter: "blur(10px)",
-                background: "rgba(255,255,255,0.1)",
-              }}
-            >
-              <div className="head-div">
-                {" "}
-                <span className="rate">
-                  <img src={star} alt="*" />
-                  <span className="the-number">7.2</span>
-                </span>{" "}
-                <span className="year d-sm-none">
-                  the texes chainsaw masacre
-                </span>
-                <span className="year">1988</span>
-              </div>
-              <h2 className="d-none d-sm-block">the texes chainsaw masacre</h2>
-              <p className="d-none d-sm-block">
-                matt murder a blid laijdid ijifj ijdifjidf ijijidf ijijijdf
-                ijjijijifd ijijijidf ijijijidf ijijijdf ijijijijdf ijijijfi{" "}
-              </p>
-            </div>
-          </div>
-
-          <div className="carousel-item" style={{ maxHeight: "600px" }}>
-            <img
-              className="d-block w-100"
-              src="https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3JtMjE4YmF0Y2g5LW15bnQtNjMuanBn.jpg"
-              alt="Second slide"
-            />
-            <div
-              className="movie-details"
-              style={{
-                backdropFilter: "blur(10px)",
-                WebkitBackdropFilter: "blur(10px)",
-                background: "rgba(255,255,255,0.1)",
-              }}
-            >
-              <div className="head-div">
-                {" "}
-                <span className="rate">
-                  <img src={star} alt="*" />
-                  <span className="the-number">7.2</span>
-                </span>{" "}
-                <span className="year d-sm-none">
-                  the texes chainsaw masacre 2
-                </span>
-                <span className="year">1988</span>
-              </div>
-              <h2 className="d-none d-sm-block">
-                the texes chainsaw masacre 2
-              </h2>
-              <p className="d-none d-sm-block">
-                matt murder a blid laijdid ijifj ijdifjidf ijijidf ijijijdf
-                ijjijijifd ijijijidf ijijijidf ijijijdf ijijijijdf ijijijfi{" "}
-              </p>
-            </div>
-          </div>
-
-          <div className="carousel-item" style={{ maxHeight: "600px" }}>
-            <img
-              className="d-block w-100"
-              src="https://www.oxfordwebstudio.com/user/pages/06.da-li-znate/sta-je-background/sta-je-background.jpg"
-              alt="Third slide"
-            />
-            <div
-              className="movie-details"
-              style={{
-                backdropFilter: "blur(10px)",
-                WebkitBackdropFilter: "blur(10px)",
-                background: "rgba(255,255,255,0.1)",
-              }}
-            >
-              <div className="head-div">
-                {" "}
-                <span className="rate">
-                  <img src={star} alt="*" />
-                  <span className="the-number">7.2</span>
-                </span>{" "}
-                <span className="year d-sm-none">
-                  the texes chainsaw masacre 3
-                </span>
-                <span className="year">1988</span>
-              </div>
-              <h2 className="d-none d-sm-block">
-                the texes chainsaw masacre 3
-              </h2>
-              <p className="d-none d-sm-block">
-                matt murder a blid laijdid ijifj ijdifjidf ijijidf ijijijdf
-                ijjijijifd ijijijidf ijijijidf ijijijdf ijijijijdf ijijijfi{" "}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <button
-          className="carousel-control-prev"
-          type="button"
-          data-bs-target="#carouselExampleControls"
-          data-bs-slide="prev"
-        >
-          <span className="carousel-control-prev-icon"></span>
-        </button>
-
-        <button
-          className="carousel-control-next"
-          type="button"
-          data-bs-target="#carouselExampleControls"
-          data-bs-slide="next"
-        >
-          <span className="carousel-control-next-icon"></span>
-        </button>
-      </div> */}
-      {/* <h4>Trending Now</h4>
-      <div className="my-slider">
-        <div className="the-slide">
-          <div className="box">
-            <img
-              src="https://image.tmdb.org/t/p/original/e9UvRjJAqn2hLXDfMHU1LFMEKGv.jpg"
-              alt=""
-            />
-            <div className="details">
-              <h3> the texas chainsaw </h3>
-              <p>horor</p>
-            </div>
-          </div>
-          <div className="box">
-            <img
-              src="https://image.tmdb.org/t/p/original/e9UvRjJAqn2hLXDfMHU1LFMEKGv.jpg"
-              alt=""
-            />
-            <div className="details">
-              <h3> the texas chainsaw </h3>
-              <p>horor</p>
-            </div>
-          </div>
-          <div className="box">
-            <img
-              src="https://image.tmdb.org/t/p/original/e9UvRjJAqn2hLXDfMHU1LFMEKGv.jpg"
-              alt=""
-            />
-            <div className="details">
-              <h3> the texas chainsaw </h3>
-              <p>horor</p>
-            </div>
-          </div>
-
-          <div className="box">
-            <img
-              src="https://image.tmdb.org/t/p/original/e9UvRjJAqn2hLXDfMHU1LFMEKGv.jpg"
-              alt=""
-            />
-            <div className="details">
-              <h3> the texas chainsaw </h3>
-              <p>horor</p>
-            </div>
-          </div>
-        </div>
-      </div> */}
       <h4>Trending Now</h4>
 
       <div className="my-slider">
@@ -325,8 +148,7 @@ const Home = () => {
         </div>
       </div>
       <div className="latest-movies">
-        <h4>Latest Movies</h4>
-
+        <h4>Top Rated Movies</h4>
         <div className="movies-container row">
           {topRated?.map((movie) => (
             <div
@@ -351,100 +173,33 @@ const Home = () => {
           ))}
         </div>
       </div>
-      {/* <div className="latest-movies">
-        <h4>latest movies</h4>
+      <div className="latest-movies">
+        <h4>Top Rated TV Shows</h4>
+
         <div className="movies-container row">
-          <div className="box col-5 col-sm-4 col-md-2">
-            <img
-              src="https://image.tmdb.org/t/p/original/e9UvRjJAqn2hLXDfMHU1LFMEKGv.jpg"
-              alt=""
-            />
-            <p className="time">1h 56m 2026</p>
-            <p className="title">Moral kombat 2</p>
-            <div className="type-container">
-              <span>Action</span>
-              <span>Movie</span>
-            </div>
-          </div>
-          <div className="box col-5 col-sm-4 col-md-2">
-            <img
-              src="https://image.tmdb.org/t/p/original/e9UvRjJAqn2hLXDfMHU1LFMEKGv.jpg"
-              alt=""
-            />
-            <p className="time">1h 56m 2026</p>
-            <p className="title">Moral kombat 2</p>
-            <div className="type-container">
-              <span>Action</span>
-              <span>Movie</span>
-            </div>
-          </div>
-          <div className="box col-5 col-sm-4 col-md-2">
-            <img
-              src="https://image.tmdb.org/t/p/original/e9UvRjJAqn2hLXDfMHU1LFMEKGv.jpg"
-              alt=""
-            />
-            <p className="time">1h 56m 2026</p>
-            <p className="title">Moral kombat 2</p>
-            <div className="type-container">
-              <span>Action</span>
-              <span>Movie</span>
-            </div>
-          </div>
-          <div className="box col-5 col-sm-4 col-md-2">
-            <img
-              src="https://image.tmdb.org/t/p/original/e9UvRjJAqn2hLXDfMHU1LFMEKGv.jpg"
-              alt=""
-            />
-            <p className="time">1h 56m 2026</p>
-            <p className="title">Moral kombat 2</p>
-            <div className="type-container">
-              <span>Action</span>
-              <span>Movie</span>
-            </div>
-          </div>
-          <div className="box col-5 col-sm-4 col-md-2">
-            <img
-              src="https://image.tmdb.org/t/p/original/e9UvRjJAqn2hLXDfMHU1LFMEKGv.jpg"
-              alt=""
-            />
-            <p className="time">1h 56m 2026</p>
-            <p className="title">Moral kombat 2</p>
-            <div className="type-container">
-              <span>Action</span>
-              <span>Movie</span>
-            </div>
-          </div>
-        </div>
-      </div> */}
-      {/* <div className="container">
-        <h2 className="fw-bold text-golden text-center mt-5 pt-5">
-          OUR DESIGN WORK
-        </h2>
-        <div className="cate-title">Interior Design Work</div>
-        <div className="d-flex flex-wrap flex-sm-nowrap justify-content-between pt-4 group-bottons">
-          {tabs.map((tab) => (
-            <span
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`tab-item ${activeTab === tab.id ? "active-tab" : ""}`}
+          {TopRatedTvShows?.map((tv) => (
+            <div
+              key={tv.id}
+              className="box col-5 col-sm-4 col-md-2"
+              onClick={() => navicate(`/tv/${tv.id}`)}
             >
-              {tab.label}
-            </span>
+              <img
+                src={`https://image.tmdb.org/t/p/w500${tv.poster_path}`}
+                alt={tv.name}
+              />
+
+              <p className="time">{tv.first_air_date?.split("-")[0]}</p>
+
+              <p className="title">{tv.name}</p>
+
+              <div className="type-container">
+                <span>TV Show</span>
+                <span>⭐ {tv.vote_average?.toFixed(1)}</span>
+              </div>
+            </div>
           ))}
         </div>
-        <div className="">
-          <PostList activeTab={activeTab} />
-        </div>
       </div>
-      {user ? (
-        <botton className="delete-btn" onClick={() => dispatch(logoutUser())}>
-          Logout
-        </botton>
-      ) : (
-        <botton className="delete-btn" onClick={() => navicate("/login")}>
-          Login
-        </botton>
-      )} */}
     </Main>
   );
 };

@@ -44,6 +44,10 @@ export const fetchMovieDetails = createAsyncThunk(
     return response.data;
   }
 );
+export const getTopRatedTvShows = () =>
+  api.get(
+    `https://api.themoviedb.org/3/tv/top_rated?api_key=5cb3971f2ed6c001df1ae772ee291eb2`
+  );
 //import.meta.env.VITE_TMDB_API_KEY
 
 //

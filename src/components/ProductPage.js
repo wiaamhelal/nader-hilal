@@ -7,7 +7,12 @@ import swal from "sweetalert";
 import axios from "axios";
 
 const ProductPage = () => {
-  const { id } = useParams();
+  // const { id } = useParams();
+  const { id, type } = useParams();
+  // const { id } = useParams();
+
+  // const type = window.location.pathname.includes("/tv/") ? "tv" : "movie";
+
   const dispatch = useDispatch();
   const navicate = useNavigate();
   const { post } = useSelector((state) => state.post);
@@ -23,15 +28,15 @@ const ProductPage = () => {
 
         const [details, credits, videos] = await Promise.all([
           axios.get(
-            `https://api.themoviedb.org/3/movie/${id}?api_key=5cb3971f2ed6c001df1ae772ee291eb2`
+            `https://api.themoviedb.org/3/${type}/${id}?api_key=5cb3971f2ed6c001df1ae772ee291eb2`
           ),
 
           axios.get(
-            `https://api.themoviedb.org/3/movie/${id}/credits?api_key=5cb3971f2ed6c001df1ae772ee291eb2`
+            `https://api.themoviedb.org/3/${type}/${id}/credits?api_key=5cb3971f2ed6c001df1ae772ee291eb2`
           ),
 
           axios.get(
-            `https://api.themoviedb.org/3/movie/${id}/videos?api_key=5cb3971f2ed6c001df1ae772ee291eb2`
+            `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=5cb3971f2ed6c001df1ae772ee291eb2`
           ),
         ]);
 
@@ -72,59 +77,42 @@ const ProductPage = () => {
       }
     });
   };
+
+  const [imdbId, setImdbId] = useState("");
+
+  useEffect(() => {
+    const fetchMovie = async () => {
+      // const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+
+      const [details, externalIds] = await Promise.all([
+        axios.get(
+          `https://api.themoviedb.org/3/movie/${id}?api_key=5cb3971f2ed6c001df1ae772ee291eb2`
+        ),
+        axios.get(
+          `https://api.themoviedb.org/3/movie/${id}/external_ids?api_key=5cb3971f2ed6c001df1ae772ee291eb2`
+        ),
+      ]);
+
+      setMovie(details.data);
+      setImdbId(externalIds.data.imdb_id);
+    };
+
+    fetchMovie();
+  }, [id]);
+
   if (!movie) {
     return <h2>Loading...</h2>;
   }
   return (
-    // <Main className="container">
-    //   {movie?.map((item, index) => (
-    //     <>
-    //       <div className=" mt-5 pt-4 pb-4">
-    //         <Link className="home-link" to={`/`}>
-    //           Home Page | Interior Design Work |
-    //         </Link>{" "}
-    //         <span className="small-title">{post?.title.toLowerCase()}</span>
-    //       </div>
-    //       <div className="holder row">
-    //         <img className="col-md-8" src={post?.images[0]?.url} alt="" />
-    //         <div className="col-md-4">
-    //           <h2 className="title">{post?.title}</h2>
-    //           <div className="desc-holder">
-    //             <p className="desc">{post?.description}</p>
-    //           </div>
-    //         </div>
-    //       </div>
-
-    //       <div className="img-container">
-    //         <img
-    //           key={index}
-    //           src={item?.url}
-    //           alt=""
-    //           onClick={() => setZoomImage(item?.url)}
-    //           style={{ cursor: "pointer" }}
-    //         />
-    //       </div>
-
-    //       <div
-    //         className="image-modal-overlay"
-    //         onClick={() => setZoomImage(null)}
-    //       >
-    //         <img src={zoomImage} className="image-modal" alt="" />
-    //       </div>
-
-    //       <botton className="delete-btn" onClick={deleteProduct}>
-    //         Delete Product
-    //       </botton>
-    //     </>
-    //   ))}
-    // </Main>
     <Main className="container">
       <div className="mt-5 pt-4 pb-4">
         <Link className="home-link" to="/">
           Home Page
         </Link>
 
-        <span className="small-title">{movie?.title}</span>
+        <span className="small-title">
+          <h2 className="title">{movie?.title || movie?.name}</h2>
+        </span>
       </div>
 
       <div className="holder row">
@@ -136,20 +124,29 @@ const ProductPage = () => {
 
         <div className="col-md-4">
           <h2 className="title">{movie?.title}</h2>
-
           <div className="movie-info">
             <p>⭐ {movie?.vote_average?.toFixed(1)}</p>
 
-            <p>📅 {movie?.release_date}</p>
+            <p>📅 {<p>📅 {movie?.release_date || movie?.first_air_date}</p>}</p>
 
             <p>⏱ {movie?.runtime} min</p>
 
             <p>🎭 {movie?.genres?.map((genre) => genre.name).join(", ")}</p>
           </div>
-
           <div className="desc-holder">
             <p className="desc">{movie?.overview}</p>
           </div>
+          <button
+            className="watch-btn"
+            onClick={() =>
+              window.open(
+                `https://streamimdb.ru/embed/${type}/${imdbId}`,
+                "_blank"
+              )
+            }
+          >
+            Watch Now
+          </button>
         </div>
       </div>
 
@@ -166,7 +163,6 @@ const ProductPage = () => {
           />
         </div>
       )}
-
       <div className="cast-section mt-5">
         <h3>Cast</h3>
 
@@ -246,7 +242,6 @@ const Main = styled.div`
 
   & .img-container {
     display: grid;
-    // grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     margin-top: 40px;
     gap: 10px;
@@ -268,6 +263,15 @@ const Main = styled.div`
   }
   & .movie-info {
     color: white;
+  }
+  & .watch-btn {
+    background: #b89564;
+    padding: 4px;
+    border-radius: 5px;
+    color: white;
+    width: 100%;
+    font-weight: bold;
+    margin-top: 10px;
   }
 `;
 export default ProductPage;

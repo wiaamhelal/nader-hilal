@@ -1,69 +1,60 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import LanguageSwitcher from "./LanguageSwitcher";
 import TranslateWidget from "./TranslateWedgit";
-import Logo from "../img/WhatsApp_Image_2025-11-18_at_01.33.12_1e0bf741-removebg-preview.png";
 import menuToggle from "../img/menu-alt-1-svgrepo-com.svg";
-import phone from "../img/phone-call-alt-1-svgrepo-com.svg";
-import whatsap from "../img/whatsapp-svgrepo-com.svg";
-import focebook from "../img/facebook-176-svgrepo-com.svg";
-import linkedien from "../img/linkedin-161-svgrepo-com.svg";
-import instgram from "../img/instagram-svgrepo-com.svg";
-import language from "../img/earth-8-svgrepo-com.svg";
+import axios from "axios";
+import logo from "../img/lia-logo.jpeg";
 const Headerr = () => {
   const dispatch = useDispatch();
-  const navicate = useNavigate();
+  const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
   const closeMenu = () => {
     const menu = document.getElementById("navbarSupportedContent");
     menu.classList.remove("show");
   };
+
+  const [search, setSearch] = useState("");
+  const [results, setResults] = useState([]);
+
+  useEffect(() => {
+    const timer = setTimeout(async () => {
+      if (search.trim().length < 2) {
+        setResults([]);
+        return;
+      }
+
+      try {
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/search/multi?api_key=5cb3971f2ed6c001df1ae772ee291eb2&query=${search}`
+        );
+
+        setResults(response.data.results.slice(0, 6));
+      } catch (err) {
+        console.log(err);
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [search]);
+
+  console.log(results);
   return (
     <Main>
-      {/* <div className="contacnt">
-    <div className="box">
-      <a href="https://www.facebook.com/naderhilalo">
-        <img src={focebook} alt="" />
-      </a>
-
-      <a href="https://ae.linkedin.com/in/nader-hilal">
-        <img src={linkedien} alt="" />
-      </a>
-
-      <a href="https://www.instagram.com/nader.hilal/">
-        <img src={instgram} alt="" />
-      </a>
-
-      <a href="tel:+971547330801">
-        <img src={phone} alt="" />
-      </a>
-
-      <a className="w-contact" href="https://wa.me/+963938353816">
-        <img src={whatsap} alt="" />
-      </a>
-
-      <div className="d-flex align-items-center">
-        <span className="distin">|</span>
-        <img src={language} alt="" />
-        <span className="lang">EN AR</span>
-      </div>
-    </div>
-  </div> */}
-
       <nav
         className="navbar navbar-expand-lg navbar-dark my-nav"
         style={{ background: "#171717" }}
       >
         <div className="container-fluid">
           {/* LOGO */}
-          {/* <img
-        className="logo-img"
-        src={Logo}
-        alt=""
-        onClick={() => navigate("/")}
-      /> */}
+          <img
+            className="logo-img"
+            src={logo}
+            alt=""
+            onClick={() => navigate("/")}
+          />
 
           {/* TOGGLE BUTTON */}
           <button
@@ -141,7 +132,7 @@ const Headerr = () => {
             </ul>
 
             {/* SEARCH FORM */}
-            <form className="d-flex ms-lg-3 mt-3 mt-lg-0">
+            {/* <form className="d-flex ms-lg-3 mt-3 mt-lg-0">
               <input
                 className="form-control me-2"
                 type="search"
@@ -152,7 +143,53 @@ const Headerr = () => {
               <button className="btn my-botton" type="submit">
                 Search
               </button>
+            </form> */}
+            <form
+              // onSubmit={searchHandler}
+              className="d-flex ms-lg-3 mt-3 mt-lg-0"
+            >
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search movies or TV shows..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+
+              <button className="btn my-botton" type="submit">
+                Search
+              </button>
             </form>
+            <div className="search-results">
+              {results.map((item) => (
+                <Link
+                  onClick={() => {
+                    setSearch("");
+                    setResults([]);
+                  }}
+                  key={item.id}
+                  to={
+                    item.media_type === "movie"
+                      ? `/movie/${item.id}`
+                      : `/tv/${item.id}`
+                  }
+                  className="result-item"
+                >
+                  <img
+                    src={`https://image.tmdb.org/t/p/w92${
+                      item.poster_path || item.profile_path
+                    }`}
+                    alt=""
+                  />
+
+                  <div>
+                    <p>{item.title || item.name}</p>
+
+                    <small>{item.media_type}</small>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </nav>
@@ -190,9 +227,11 @@ const Main = styled.div`
   }
 
   & .logo-img {
-    width: 120px;
+    width: 70px;
     object-fit: contain;
     margin-left: 10px;
+    height: 65px;
+    border-radius: 5px;
   }
   & .toggle-img {
     width: 40px;
@@ -227,6 +266,35 @@ const Main = styled.div`
     --bs-btn-disabled-bg: transparent;
     --bs-btn-disabled-border-color: #b89564;
     --bs-gradient: none;
+  }
+
+  & .search-results {
+    position: absolute;
+    width: 100%;
+    background: #111;
+    z-index: 999;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px;
+    @media (min-width: 668px) {
+      margin-top: 630px;
+    }
+  }
+
+  & .result-item {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+  }
+
+  & .result-item:hover {
+    background: #222;
+  }
+
+  & .result-item img {
+    width: 50px;
   }
 `;
 // const Basket = styled.div`

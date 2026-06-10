@@ -8,6 +8,7 @@ import {
   getLatestMovies,
   getLatestTvShows,
   fetchMovieDetails,
+  getTopRatedTvShows,
 } from "../apiCalls/movieApiCall";
 
 export const fetchHomeData = createAsyncThunk(
@@ -21,6 +22,7 @@ export const fetchHomeData = createAsyncThunk(
       latestMovies,
       latestTvShows,
       today,
+      TopRatedTvShows,
     ] = await Promise.all([
       getTrendingMovies(),
       getPopularMovies(),
@@ -29,6 +31,7 @@ export const fetchHomeData = createAsyncThunk(
       getTodayMovies(),
       getLatestMovies(),
       getLatestTvShows(),
+      getTopRatedTvShows(),
     ]);
 
     return {
@@ -39,6 +42,7 @@ export const fetchHomeData = createAsyncThunk(
       today: today.data.results,
       latestMovies: latestMovies.data.results,
       latestTvShows: latestTvShows.data.results,
+      TopRatedTvShows: TopRatedTvShows.data.results,
     };
   }
 );
@@ -56,6 +60,7 @@ const moviesSlice = createSlice({
     latestMovies: [],
     latestTvShows: [],
     movieDetails: null,
+    TopRatedTvShows: [],
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -73,6 +78,7 @@ const moviesSlice = createSlice({
         state.today = action.payload.today;
         state.latestMovies = action.payload.latestMovies;
         state.latestTvShows = action.payload.latestTvShows;
+        state.TopRatedTvShows = action.payload.TopRatedTvShows;
       })
       .addCase(fetchHomeData.rejected, (state, action) => {
         state.loading = false;
