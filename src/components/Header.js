@@ -6,11 +6,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import TranslateWidget from "./TranslateWedgit";
 import menuToggle from "../img/menu-alt-1-svgrepo-com.svg";
 import axios from "axios";
-import logo from "../img/lia-logo.jpeg";
 const Headerr = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { user } = useSelector((state) => state.auth);
   const closeMenu = () => {
     const menu = document.getElementById("navbarSupportedContent");
     menu.classList.remove("show");
@@ -49,12 +45,12 @@ const Headerr = () => {
       >
         <div className="container-fluid">
           {/* LOGO */}
-          <img
+          {/* <img
             className="logo-img"
             src={logo}
             alt=""
             onClick={() => navigate("/")}
-          />
+          /> */}
 
           {/* TOGGLE BUTTON */}
           <button
@@ -79,17 +75,15 @@ const Headerr = () => {
                 </Link>
               </li>
 
-              {user && (
-                <li className="nav-item">
-                  <Link
-                    className="nav-link"
-                    onClick={closeMenu}
-                    to="/create-post"
-                  >
-                    Popular Movies
-                  </Link>
-                </li>
-              )}
+              <li className="nav-item">
+                <Link
+                  className="nav-link"
+                  onClick={closeMenu}
+                  to="/create-post"
+                >
+                  Popular Movies
+                </Link>
+              </li>
 
               <li className="nav-item">
                 <Link className="nav-link" onClick={closeMenu} to="/about">

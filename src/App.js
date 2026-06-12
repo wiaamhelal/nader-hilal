@@ -2,11 +2,8 @@ import React from "react";
 import Home from "./components/Home";
 import Header from "./components/Header";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import ProductPage from "./components/ProductPage";
 import styled from "styled-components";
-import CreatePost from "../src/components/CreatePost";
-import whatsap from "./img/whatsapp-svgrepo-com.svg";
-import About from "./components/About";
+// import CreatePost from "../src/components/CreatePost";
 import Login from "./components/Login";
 import MoviePage from "./components/MoviePage";
 import TvPage from "./components/TvPage";
@@ -36,26 +33,6 @@ const App = () => {
             </>
           }
         />
-        {/* <Route
-          path="/movie/:id"
-          element={
-            <>
-              <Header />
-              <ProductPage />
-            </>
-          }
-        /> */}
-        {/* <Route
-          path="/:type/:id"
-          element={
-            <>
-              <Header />
-              <ProductPage />
-            </>
-          }
-        /> */}
-        {/* <Route path="/tv/:id" element={<ProductPage />} />
-        <Route path="/movie/:id" element={<ProductPage />} /> */}
         <Route
           path="/movie/:id"
           element={
@@ -75,7 +52,7 @@ const App = () => {
             </>
           }
         />
-        <Route
+        {/* <Route
           path="/create-post"
           element={
             <>
@@ -83,16 +60,7 @@ const App = () => {
               <CreatePost />
             </>
           }
-        />
-        <Route
-          path="/about"
-          element={
-            <>
-              <Header />
-              <About />
-            </>
-          }
-        />
+        /> */}
         <Route
           path="/login"
           element={

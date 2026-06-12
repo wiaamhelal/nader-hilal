@@ -1,21 +1,12 @@
 import React, { useDebugValue, useEffect, useState } from "react";
 import styled from "styled-components";
-
-import Headerr from "./Header";
 import { useNavigate } from "react-router-dom";
-import PostList from "./PostList";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../redux/apiCalls/authApiCall";
 import star from "../img/star-svgrepo-com (2).svg";
-import { postActions } from "../redux/slices/postSlice";
 import { fetchHomeData } from "../redux/slices/movieSlice";
+import Loading from "./Loading";
+import trendingImg from "../img/trending-up-svgrepo-com.svg";
 const Home = () => {
-  // useEffect(() => {
-  //   fetch("http://localhost:8000/api/movies/trending")
-  //     .then((res) => res.json())
-  //     .then((data) => dispatch(postActions.setAllData(data)));
-  // }, []);
-
   const {
     trending,
     popular,
@@ -40,15 +31,13 @@ const Home = () => {
     { id: "Hall Apartment", label: "REVIEW BY PROJECT" },
     { id: "One Room", label: "REVIEW BY CATEGORY" },
   ];
-  const { user } = useSelector((state) => state.auth);
-  const { alldata } = useSelector((state) => state.post);
-  console.log(alldata);
   const [activeTab, setActiveTab] = useState("all");
   useEffect(() => {
     dispatch(fetchHomeData());
   }, [dispatch]);
 
-  if (loading) return <h1>Loading...</h1>;
+  // if (loading) return <h1>Loading...</h1>;
+  if (loading) return <Loading />;
   return (
     <Main>
       <div
@@ -123,7 +112,11 @@ const Home = () => {
           <span className="carousel-control-next-icon"></span>
         </button>
       </div>
-      <h4>Trending Now</h4>
+      <div className="trending-img-holder">
+        <img src={trendingImg} alt="" />
+        <h4>Trending Now</h4>
+        <img src={trendingImg} alt="" />
+      </div>
 
       <div className="my-slider">
         <div className="the-slide">
@@ -139,8 +132,10 @@ const Home = () => {
               />
 
               <div className="details">
-                <h3>{movie.title}</h3>
-
+                {movie.title.length > 10 && (
+                  <h3>{movie.title.slice(0, 10)}...</h3>
+                )}
+                <h3>{movie.title.length < 10 && movie.title}</h3>
                 <p>{movie?.release_date}</p>
               </div>
             </div>
@@ -302,7 +297,8 @@ const Main = styled.div`
     }
   }
     & .movie-details {
-    color: #b89564;
+    // color: #b89564;
+    color: #ffffff80;
     background: #eeeeee00;
     border-radius: 6px;
     padding: 10px;
@@ -326,14 +322,30 @@ const Main = styled.div`
       }
      }
     }
-          h4 {
-    color: #b89564;
-    margin: auto;
+
+    & .trending-img-holder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & img {
+        width: 50px;
+
+    }
+              h4 {
+    // color: #b89564;
+    // margin: auto;
+    color: white;
     width: fit-content;
     padding: 10px 0 10px 0;
     margin-top: 10px;
     margin-bottom: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 26px;
      }
+    }
+
      & .my-slider {
      & .details {
     position: absolute;
@@ -367,9 +379,9 @@ const Main = styled.div`
     //  position: absolute;
     // top: 137px;
     // left: 11px;
-    color: #b89564;
     font-size: 17px;
     font-weight: bold;
+    color: #ffffff80;
       }
      }
      }

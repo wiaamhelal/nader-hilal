@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
+import Loading from "./Loading";
 
 const MoviePage = () => {
   const { id } = useParams();
@@ -56,7 +57,7 @@ const MoviePage = () => {
   }, [id]);
 
   if (!movie) {
-    return <h2 className="text-center mt-5">Loading...</h2>;
+    return <Loading />;
   }
 
   return (

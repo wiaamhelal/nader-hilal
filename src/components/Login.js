@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../redux/apiCalls/authApiCall";
+// import { loginUser } from "../redux/apiCalls/authApiCall";
 import styled from "styled-components";
 const Login = () => {
   const [email, setemail] = useState("");
@@ -23,7 +23,7 @@ const Login = () => {
     } else if (!password) {
       return toast.error("password is required");
     } else {
-      dispatch(loginUser({ email, password }));
+      // dispatch(loginUser({ email, password }));
     }
   };
 

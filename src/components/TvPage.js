@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
+import Loading from "./Loading";
 
 const TvPage = () => {
   const { id } = useParams();
@@ -54,7 +55,7 @@ const TvPage = () => {
   }, [id]);
 
   if (!tv) {
-    return <h2 className="text-center mt-5">Loading...</h2>;
+    return <Loading />;
   }
 
   return (
