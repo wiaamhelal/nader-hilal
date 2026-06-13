@@ -212,3 +212,7 @@ input[type="file"] {
   cursor: pointer;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
+.search-input::placeholder {
+  color: #ffffff80;
+  opacity: 1;
+}

@@ -6,7 +6,10 @@ import star from "../img/star-svgrepo-com (2).svg";
 import { fetchHomeData } from "../redux/slices/movieSlice";
 import Loading from "./Loading";
 import trendingImg from "../img/trending-up-svgrepo-com.svg";
+import axios from "axios";
+
 const Home = () => {
+  const API_KEY = "5cb3971f2ed6c001df1ae772ee291eb2";
   const {
     trending,
     popular,
@@ -35,12 +38,34 @@ const Home = () => {
   useEffect(() => {
     dispatch(fetchHomeData());
   }, [dispatch]);
+  const [movies, setMovies] = useState([]);
 
-  // if (loading) return <h1>Loading...</h1>;
+  useEffect(() => {
+    const fetchMovies = async () => {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`
+      );
+
+      setMovies(response.data.results.slice(0, 5));
+    };
+
+    fetchMovies();
+  }, []);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (!movies.length) return;
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev === movies.length - 1 ? 0 : prev + 1));
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [movies]);
   if (loading) return <Loading />;
   return (
     <Main>
-      <div
+      {/* <div
         id="carouselExampleControls"
         className="carousel slide"
         data-bs-ride="carousel"
@@ -111,6 +136,22 @@ const Home = () => {
         >
           <span className="carousel-control-next-icon"></span>
         </button>
+      </div> */}
+      <div className="hero">
+        {movies.map((movie, index) => (
+          <div
+            key={movie.id}
+            className={`slide ${index === currentIndex ? "active" : ""}`}
+            style={{
+              backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
+            }}
+          />
+        ))}
+
+        <div className="hero-content">
+          <h1>{movies[currentIndex]?.title}</h1>
+          <p>{movies[currentIndex]?.overview}</p>
+        </div>
       </div>
       <div className="trending-img-holder">
         <img src={trendingImg} alt="" />
@@ -427,7 +468,60 @@ const Main = styled.div`
   }
   }
  }
+& .hero {
+  // position: relative;
+  // width: 100%;
+  //   mask-image: linear-gradient(180deg, #000, transparent);
+  //     max-height: 515px;
+  // overflow: hidden;
 
+
+  position: relative;
+    width: 109%;
+    mask-image: linear-gradient(180deg, #000, transparent);
+    max-height: 555px;
+    overflow: hidden;
+    top: -65px;
+    left: -21px;
+}
+
+& .slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+& .slide.active {
+  opacity: 1;
+}
+
+& .slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+& .hero-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+  padding-left: 80px;
+  padding-top: 300px;
+  max-width: 700px;
+}
+
+& .hero-content h1 {
+  font-size: 4rem;
+}
+
+& .hero-content p {
+  margin-top: 20px;
+  font-size: 1.1rem;
+}
 `;
 
 export default Home;

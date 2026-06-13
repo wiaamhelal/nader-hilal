@@ -38,10 +38,17 @@ const Headerr = () => {
 
   console.log(results);
   return (
-    <Main>
+    <Main
+      style={{
+        background: "transparent",
+        position: "absolute",
+        zIndex: "999999",
+        right: "0",
+      }}
+    >
       <nav
         className="navbar navbar-expand-lg navbar-dark my-nav"
-        style={{ background: "#171717" }}
+        style={{ background: "#171717", background: "transparent" }}
       >
         <div className="container-fluid">
           {/* LOGO */}
@@ -142,12 +149,25 @@ const Headerr = () => {
               // onSubmit={searchHandler}
               className="d-flex ms-lg-3 mt-3 mt-lg-0"
             >
-              <input
+              {/* <input 
                 className="form-control me-2"
                 type="search"
                 placeholder="Search movies or TV shows..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
+                style={{ background: "transparent", borderColor: "#b89564" }}
+              /> */}
+              <input
+                className="form-control me-2 search-input"
+                type="search"
+                placeholder="Search movies or TV shows..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                style={{
+                  background: "transparent",
+                  borderColor: "#b89564",
+                  color: "white",
+                }}
               />
 
               <button className="btn my-botton" type="submit">
@@ -194,6 +214,8 @@ const Main = styled.div`
   // height: 96px;
   background-color: #171717;
   margin-top: -1px;
+  position: relative;
+  z-index: 9999999;
 
   .contacnt {
     height: 33px;
