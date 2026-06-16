@@ -7,6 +7,7 @@ import { fetchHomeData } from "../redux/slices/movieSlice";
 import Loading from "./Loading";
 import trendingImg from "../img/trending-up-svgrepo-com.svg";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   const API_KEY = "5cb3971f2ed6c001df1ae772ee291eb2";
@@ -159,6 +160,19 @@ const Home = () => {
           <span className="play-btn">Play Now</span>
         </div>
       </div> */}
+      <Helmet>
+        <title>FlickDrive | Movies, TV Shows & Entertainment</title>
+
+        <meta
+          name="description"
+          content="Discover trending movies, TV shows, trailers, ratings and cast information on FlickDrive."
+        />
+
+        <meta
+          name="keywords"
+          content="movies, tv shows, streaming, trailers, flickdrive"
+        />
+      </Helmet>
       <div className="hero">
         {movies.map((movie, index) => (
           <div
@@ -194,9 +208,9 @@ const Home = () => {
         </div>
       </div>
       <div className="trending-img-holder">
-        <img src={trendingImg} alt="" />
+        <img src={trendingImg} loading="lazy" alt="flickDrive" />
         <h4>Trending Now</h4>
-        <img src={trendingImg} alt="" />
+        <img src={trendingImg} loading="lazy" alt="flickDrive" />
       </div>
 
       <div className="my-slider">
@@ -235,6 +249,7 @@ const Home = () => {
               <img
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 alt={movie.title}
+                loading="lazy"
               />
 
               <p className="time">{movie.release_date?.split("-")[0]}</p>
@@ -262,6 +277,7 @@ const Home = () => {
               <img
                 src={`https://image.tmdb.org/t/p/w500${tv.poster_path}`}
                 alt={tv.name}
+                loading="lazy"
               />
 
               <p className="time">{tv.first_air_date?.split("-")[0]}</p>

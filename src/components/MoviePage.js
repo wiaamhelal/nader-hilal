@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import Loading from "./Loading";
-
+import { Helmet } from "react-helmet-async";
 const MoviePage = () => {
   const { id } = useParams();
 
@@ -55,13 +55,36 @@ const MoviePage = () => {
 
     fetchMovie();
   }, [id]);
-
   if (!movie) {
     return <Loading />;
   }
 
   return (
     <Main className="container">
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Movie",
+            name: movie?.title,
+            description: movie?.overview,
+            image: `https://image.tmdb.org/t/p/original${movie?.poster_path}`,
+            datePublished: movie?.release_date,
+          })}
+        </script>
+        <title>{movie?.title} | FlickDrive</title>
+
+        <meta name="description" content={movie?.overview} />
+
+        <meta property="og:title" content={movie?.title} />
+
+        <meta property="og:description" content={movie?.overview} />
+
+        <meta
+          property="og:image"
+          content={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}
+        />
+      </Helmet>
       <div className="mt-5 pt-4 pb-4">
         <Link className="home-link" to="/">
           Home Page
@@ -75,6 +98,7 @@ const MoviePage = () => {
           className="col-lg-8"
           src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
           alt={movie.title}
+          loading="lazy"
         />
 
         <div className="col-lg-4">
@@ -134,6 +158,7 @@ const MoviePage = () => {
                 <img
                   src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
                   alt={actor.name}
+                  loading="lazy"
                 />
               )}
 

@@ -7,20 +7,17 @@ import { BrowserRouter } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
 import Store from "./redux/Store";
-
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import "bootstrap/dist/js/bootstrap.js";
-// main.jsx أو index.js
-// import { loadStripe } from "@stripe/stripe-js";
-// import { Elements } from "@stripe/react-stripe-js";
+import { HelmetProvider } from "react-helmet-async";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Provider store={Store}>
-        <App />
-      </Provider>
+      <HelmetProvider>
+        <Provider store={Store}>
+          <App />
+        </Provider>
+      </HelmetProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

@@ -57,7 +57,8 @@ const Headerr = () => {
           <img
             className="logo-img"
             src={logo}
-            alt=""
+            loading="lazy"
+            alt="flickDrive"
             onClick={() => navigate("/")}
           />
           {/* TOGGLE BUTTON */}
@@ -70,7 +71,12 @@ const Headerr = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <img className="toggle-img" src={menuToggle} alt="" />
+            <img
+              className="toggle-img"
+              src={menuToggle}
+              loading="lazy"
+              alt="flickDrive"
+            />
           </button>
 
           {/* NAVBAR CONTENT */}
@@ -194,7 +200,8 @@ const Headerr = () => {
                     src={`https://image.tmdb.org/t/p/w92${
                       item.poster_path || item.profile_path
                     }`}
-                    alt=""
+                    loading="lazy"
+                    alt="flickDrive"
                   />
 
                   <div>

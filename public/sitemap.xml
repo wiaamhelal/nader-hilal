@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+<url>
+<loc>https://flickdrive.online/</loc>
+</url>
+
+<url>
+<loc>https://flickdrive.online/trending</loc>
+</url>
+
+<url>
+<loc>https://flickdrive.online/popular</loc>
+</url>
+
+<url>
+<loc>https://flickdrive.online/top-rated</loc>
+</url>
+
+</urlset>

@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import Loading from "./Loading";
+import { Helmet } from "react-helmet-async";
 
 const TvPage = () => {
   const { id } = useParams();
@@ -60,6 +61,20 @@ const TvPage = () => {
 
   return (
     <Main className="container">
+      <Helmet>
+        <title>{tv?.name} | FlickDrive</title>
+
+        <meta name="description" content={tv?.overview} />
+
+        <meta property="og:title" content={tv?.name} />
+
+        <meta property="og:description" content={tv?.overview} />
+
+        <meta
+          property="og:image"
+          content={`https://image.tmdb.org/t/p/original${tv?.poster_path}`}
+        />
+      </Helmet>
       <div className="mt-5 pt-4 pb-4">
         <Link className="home-link" to="/">
           Home Page
@@ -73,6 +88,7 @@ const TvPage = () => {
           className="col-md-8"
           src={`https://image.tmdb.org/t/p/original${tv.backdrop_path}`}
           alt={tv.name}
+          loading="lazy"
         />
 
         <div className="col-md-4">
@@ -134,6 +150,7 @@ const TvPage = () => {
                 <img
                   src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
                   alt={actor.name}
+                  loading="lazy"
                 />
               )}
 
