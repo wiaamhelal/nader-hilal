@@ -1,6 +1,6 @@
 import React, { useDebugValue, useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import star from "../img/star-svgrepo-com (2).svg";
 import { fetchHomeData } from "../redux/slices/movieSlice";
@@ -137,6 +137,28 @@ const Home = () => {
           <span className="carousel-control-next-icon"></span>
         </button>
       </div> */}
+      {/* <div className="hero">
+        {movies.map((movie, index) => (
+          <div
+            key={movie.id}
+            className={`slide ${index === currentIndex ? "active" : ""}`}
+            style={{
+              backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
+            }}
+          />
+        ))}
+
+        <div className="hero-content">
+          <h1>{movies[currentIndex]?.title}</h1>
+
+          <div className="rate-holder">
+            <span className="imdb">IMDB 8.5</span>
+            <span className="hd">HD</span> <span className="year">2026</span>
+          </div>
+          <p>{movies[currentIndex]?.overview.slice(0, 200)}</p>
+          <span className="play-btn">Play Now</span>
+        </div>
+      </div> */}
       <div className="hero">
         {movies.map((movie, index) => (
           <div
@@ -150,7 +172,25 @@ const Home = () => {
 
         <div className="hero-content">
           <h1>{movies[currentIndex]?.title}</h1>
-          <p>{movies[currentIndex]?.overview}</p>
+
+          <div className="rate-holder">
+            <span className="imdb">
+              IMDB {movies[currentIndex]?.vote_average?.toFixed(1)}
+            </span>
+
+            <span className="hd">HD</span>
+
+            <span className="year">
+              {movies[currentIndex]?.release_date?.split("-")[0]}
+            </span>
+          </div>
+
+          <p>{movies[currentIndex]?.overview?.slice(0, 200)}</p>
+
+          {/* <span className="play-btn">Play Now</span> */}
+          <Link to={`/movie/${movies[currentIndex]?.id}`} className="play-btn">
+            Play Now
+          </Link>
         </div>
       </div>
       <div className="trending-img-holder">
@@ -243,6 +283,7 @@ const Main = styled.div`
   min-height: 100vh;
     margin-right: 20px;
     margin-left: 20px;
+        // overflow-x: hidden;
     @media(max-width:668px) {
          margin-right: 10px;
         margin-left: 10px;
@@ -469,21 +510,18 @@ const Main = styled.div`
   }
  }
 & .hero {
-  // position: relative;
-  // width: 100%;
-  //   mask-image: linear-gradient(180deg, #000, transparent);
-  //     max-height: 515px;
-  // overflow: hidden;
-
-
-  position: relative;
+      position: relative;
     width: 109%;
-    mask-image: linear-gradient(180deg, #000, transparent);
-    max-height: 555px;
+    height: 555px;
     overflow: hidden;
-    top: -65px;
+    top: -48px;
     left: -21px;
+    mask-image: linear-gradient(to bottom, transparent, black 20%, black 75%, transparent);
+         margin-bottom: -75px;
+
+
 }
+
 
 & .slide {
   position: absolute;
@@ -499,29 +537,74 @@ const Main = styled.div`
 }
 
 & .slide::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  // content: "";
+  // position: absolute;
+  // inset: 0;
+  // background: rgba(0, 0, 0, 0.5);
 }
 
 & .hero-content {
-  position: relative;
-  z-index: 2;
-  color: white;
-  padding-left: 80px;
-  padding-top: 300px;
-  max-width: 700px;
+position: relative;
+    z-index: 2;
+    color: white;
+    padding-left: 28px;
+    padding-top: 115px;
+    max-width: 700px;
+
+
 }
 
 & .hero-content h1 {
-  font-size: 4rem;
+         font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: .025em;
+    line-height: 1.25;
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+    margin-bottom: 15px;
 }
+
+
+
 
 & .hero-content p {
   margin-top: 20px;
   font-size: 1.1rem;
+      color: rgb(205 192 177);
+    margin-bottom: 32px;
 }
+
+ & .rate-holder {
+ & .imdb {
+ background-color: #eab308;
+    padding: 0px 5px;
+    border-radius: 4px;
+    color: black;
+    font-weight: bold;
+        margin-right: 12px;
+ }
+ & .hd {
+    border: 2px solid;
+    background-color: #454545a6;
+    border-color: #bababa54;
+    border-width: 1px;
+    border-radius: .25rem;
+    padding: 3px 5px;
+    font-weight: bold;
+    margin-right: 7px;
+
+ }
+ .year {
+ }
+
+ }
+  & .play-btn {
+     background: #b89564;
+    border-radius: 20px;
+    padding: 10px 31px;
+    /* color: #ffffff; */
+    color: rgb(255 255 255);
+ }
 `;
 
 export default Home;

@@ -6,6 +6,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import TranslateWidget from "./TranslateWedgit";
 import menuToggle from "../img/menu-alt-1-svgrepo-com.svg";
 import axios from "axios";
+import logo from "../img/WhatsApp Image 2026-06-15 at 2.30.53 AM.png";
 const Headerr = () => {
   const closeMenu = () => {
     const menu = document.getElementById("navbarSupportedContent");
@@ -14,7 +15,7 @@ const Headerr = () => {
 
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const timer = setTimeout(async () => {
       if (search.trim().length < 2) {
@@ -41,7 +42,7 @@ const Headerr = () => {
     <Main
       style={{
         background: "transparent",
-        position: "absolute",
+        // position: "absolute",
         zIndex: "999999",
         right: "0",
       }}
@@ -50,15 +51,15 @@ const Headerr = () => {
         className="navbar navbar-expand-lg navbar-dark my-nav"
         style={{ background: "#171717", background: "transparent" }}
       >
+        {/* <a class="navbar-brand" href="#">Navbar</a> */}
+
         <div className="container-fluid">
-          {/* LOGO */}
-          {/* <img
+          <img
             className="logo-img"
             src={logo}
             alt=""
             onClick={() => navigate("/")}
-          /> */}
-
+          />
           {/* TOGGLE BUTTON */}
           <button
             className="navbar-toggler ms-auto"
@@ -216,7 +217,10 @@ const Main = styled.div`
   margin-top: -1px;
   position: relative;
   z-index: 9999999;
-
+  // display: flex;
+  // align-items: center;
+  // justify-content: space-between;
+  // width: 100%;
   .contacnt {
     height: 33px;
     background: #000000;
@@ -243,11 +247,12 @@ const Main = styled.div`
   }
 
   & .logo-img {
-    width: 70px;
-    object-fit: contain;
-    margin-left: 10px;
-    height: 65px;
-    border-radius: 5px;
+    // width: 70px;
+    // object-fit: contain;
+    // margin-left: 10px;
+    // height: 65px;
+    // border-radius: 5px;
+    width: 77px;
   }
   & .toggle-img {
     width: 40px;
