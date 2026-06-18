@@ -12,14 +12,13 @@ const Loading = () => {
   );
 };
 const LoadingScreen = styled.div`
-  min-height: 100vh;
-  background: #000;
+  background: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 78%;
   .loader {
     text-align: center;
   }

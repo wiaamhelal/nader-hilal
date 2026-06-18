@@ -130,7 +130,10 @@ const Headerr = () => {
                   Language
                 </Link>
 
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <ul
+                  className="dropdown-menu lang-menu"
+                  aria-labelledby="navbarDropdown"
+                >
                   <li>
                     <LanguageSwitcher />
                     <TranslateWidget />
@@ -323,6 +326,10 @@ const Main = styled.div`
 
   & .result-item img {
     width: 50px;
+  }
+  & .lang-menu {
+    box-shadow: 0px -6px 22px 0px rgba(184, 149, 100, 0.45);
+    background: transparent;
   }
 `;
 // const Basket = styled.div`

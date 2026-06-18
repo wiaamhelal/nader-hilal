@@ -9,39 +9,42 @@ const LanguageSwitcher = () => {
     }
   };
 
-  const reloud = () => {
-    swal({
-      title: "change the language?",
-      text: "if the language didnt changed try again",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        window.location.reload(false);
-      }
-    });
-    // setTimeout(() => {
+  // const reloud = () => {
+  //   swal({
+  //     title: "change the language?",
+  //     text: "if the language didnt changed try again",
+  //     icon: "warning",
+  //     buttons: true,
+  //     dangerMode: true,
+  //   }).then((willDelete) => {
+  //     if (willDelete) {
+  //       window.location.reload(false);
+  //     }
+  //   });
+  //   // setTimeout(() => {
 
-    // }, 1000);
-  };
+  //   // }, 1000);
+  // };
   return (
-    <div className="p-2" onClick={reloud}>
+    <div className="p-2">
       <button
-        className="btn btn-success btn-sm d-block mb-2"
+        className="btn  btn-sm d-block mb-2"
         onClick={() => changeLanguage("ar")}
+        style={{ backgroundColor: " #b89564", color: "white" }}
       >
         arabic
       </button>
       <button
-        className="btn btn-success btn-sm d-block mb-2"
+        className="btn  btn-sm d-block mb-2"
         onClick={() => changeLanguage("en")}
+        style={{ backgroundColor: " #b89564", color: "white" }}
       >
         English
       </button>
       <button
-        className="btn btn-success btn-sm d-block"
+        className="btn  btn-sm d-block"
         onClick={() => changeLanguage("fr")}
+        style={{ backgroundColor: " #b89564", color: "white" }}
       >
         frunch
       </button>

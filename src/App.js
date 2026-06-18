@@ -7,18 +7,19 @@ import styled from "styled-components";
 import Login from "./components/Login";
 import MoviePage from "./components/MoviePage";
 import TvPage from "./components/TvPage";
+import CreatePost from "./components/CreatePost";
 
 const App = () => {
   const navicate = useNavigate();
   return (
     <Main
-      style={{
-        backgroundImage:
-          "url(https://res.cloudinary.com/dw4e01qx8/f_auto,q_auto//patterns/horizontal)",
-        // backgroundSize: "320% auto",
-        backgroundPosition: "center",
-        backgroundRepeat: "repeat",
-      }}
+    // style={{
+    //   backgroundImage:
+    //     "url(https://res.cloudinary.com/dw4e01qx8/f_auto,q_auto//patterns/horizontal)",
+    //   // backgroundSize: "320% auto",
+    //   backgroundPosition: "center",
+    //   backgroundRepeat: "repeat",
+    // }}
     >
       {/* <a className="w-contact" href="https://wa.me/+963938353816">
         <img src={whatsap} alt="" />
@@ -67,6 +68,15 @@ const App = () => {
             <>
               <Header />
               <Login />
+            </>
+          }
+        />
+        <Route
+          path="/create-post"
+          element={
+            <>
+              <Header />
+              <CreatePost />
             </>
           }
         />
