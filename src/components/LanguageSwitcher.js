@@ -1,13 +1,24 @@
 import swal from "sweetalert";
 
 const LanguageSwitcher = () => {
+  // const changeLanguage = (langCode) => {
+  //   const selectField = document.querySelector(".goog-te-combo");
+  //   if (selectField) {
+  //     selectField.value = langCode;
+  //     selectField.dispatchEvent(new Event("change"));
+  //   }
   const changeLanguage = (langCode) => {
-    const selectField = document.querySelector(".goog-te-combo");
-    if (selectField) {
-      selectField.value = langCode;
-      selectField.dispatchEvent(new Event("change"));
-    }
+    const interval = setInterval(() => {
+      const select = document.querySelector(".goog-te-combo");
+
+      if (select) {
+        select.value = langCode;
+        select.dispatchEvent(new Event("change"));
+        clearInterval(interval);
+      }
+    }, 500);
   };
+  // };
 
   // const reloud = () => {
   //   swal({
@@ -46,7 +57,7 @@ const LanguageSwitcher = () => {
         onClick={() => changeLanguage("fr")}
         style={{ backgroundColor: " #b89564", color: "white" }}
       >
-        frunch
+        french
       </button>
     </div>
   );

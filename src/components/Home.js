@@ -22,10 +22,10 @@ const Home = () => {
     TopRatedTvShows,
   } = useSelector((state) => state.movies);
 
-  console.log(TopRatedTvShows);
-  console.log(popular);
-  console.log(topRated);
-  console.log(upcoming);
+  // console.log(TopRatedTvShows);
+  // console.log(popular);
+  // console.log(topRated);
+  // console.log(upcoming);
 
   const navicate = useNavigate();
   const dispatch = useDispatch();
@@ -109,7 +109,7 @@ const Home = () => {
 
           {/* <span className="play-btn">Play Now</span> */}
           <Link to={`/movie/${movies[currentIndex]?.id}`} className="play-btn">
-            Play Now
+            Watch Now
           </Link>
         </div>
       </div>
