@@ -36,6 +36,7 @@ const Home = () => {
     { id: "One Room", label: "REVIEW BY CATEGORY" },
   ];
   const [activeTab, setActiveTab] = useState("all");
+  const [continueWatching, setContinueWatching] = useState([]);
   useEffect(() => {
     dispatch(fetchHomeData());
   }, [dispatch]);
@@ -63,6 +64,15 @@ const Home = () => {
 
     return () => clearInterval(interval);
   }, [movies]);
+
+  // const continueWatching =
+  //   JSON.parse(localStorage.getItem("continueWatching")) || [];
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem("continueWatching")) || [];
+
+    setContinueWatching(saved);
+  }, []);
+  console.log(continueWatching);
   if (loading) return <Loading />;
   return (
     <Main>
@@ -113,38 +123,87 @@ const Home = () => {
           </Link>
         </div>
       </div>
-      <div className="trending-img-holder">
-        <img src={trendingImg} loading="lazy" alt="flickDrive" />
-        <h4>Trending Now</h4>
-        <img src={trendingImg} loading="lazy" alt="flickDrive" />
-      </div>
 
-      <div className="my-slider">
-        <div className="the-slide">
-          {popular?.map((movie) => (
-            <div
-              className="box"
-              key={movie.id}
-              onClick={() => navicate(`/movie/${movie.id}`)}
-            >
-              <img
-                src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                alt={movie.title}
-              />
+      {continueWatching?.length > 0 ? (
+        <>
+          <div className="trending-img-holder">
+            <img src={trendingImg} loading="lazy" alt="flickDrive" />
+            <h4>Contunue Watching</h4>
+            <img src={trendingImg} loading="lazy" alt="flickDrive" />
+          </div>
 
-              <div className="details">
-                {movie.title.length > 10 && (
-                  <h3>{movie.title.slice(0, 10)}...</h3>
-                )}
-                <h3>{movie.title.length < 10 && movie.title}</h3>
-                <p>{movie?.release_date}</p>
-              </div>
+          <div className="my-slider">
+            <div className="the-slide">
+              {continueWatching.map((item) => (
+                <div
+                  className="box"
+                  key={`${item.mediaType}-${item.id}`}
+                  onClick={() =>
+                    window.open(
+                      `https://streamimdb.ru/embed/${item.mediaType}/${item.imdbId}`,
+                      "_blank"
+                    )
+                  }
+                >
+                  <img
+                    src={`https://image.tmdb.org/t/p/original${item.poster}`}
+                    alt={item.title}
+                  />
+
+                  <div className="details">
+                    <h3>
+                      {item.title.length > 10
+                        ? `${item.title.slice(0, 10)}...`
+                        : item.title}
+                    </h3>
+
+                    <p>{item.mediaType === "movie" ? "Movie" : "TV Show"}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="trending-img-holder">
+            <img src={trendingImg} loading="lazy" alt="flickDrive" />
+            <h4>Trending Now</h4>
+            <img src={trendingImg} loading="lazy" alt="flickDrive" />
+          </div>
+
+          <div className="my-slider">
+            <div className="the-slide">
+              {popular?.map((movie) => (
+                <div
+                  className="box"
+                  key={movie.id}
+                  onClick={() => navicate(`/movie/${movie.id}`)}
+                >
+                  <img
+                    src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                    alt={movie.title}
+                  />
+
+                  <div className="details">
+                    {movie.title.length > 10 && (
+                      <h3>{movie.title.slice(0, 10)}...</h3>
+                    )}
+                    <h3>{movie.title.length < 10 && movie.title}</h3>
+                    <p>{movie?.release_date}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
+
       <div className="latest-movies">
-        <h4>Top Rated Movies</h4>
+        <h4 className="text-white text-center mt-4 pt-1 glow-line">
+          Top Rated
+        </h4>
+        {/* <div className="glow-line"></div> */}
         <div className="movies-container row">
           {topRated?.map((movie) => (
             <div

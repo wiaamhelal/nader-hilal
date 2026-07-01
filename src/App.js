@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import MoviePage from "./components/MoviePage";
 import TvPage from "./components/TvPage";
 import CreatePost from "./components/CreatePost";
+import SearchPage from "./components/SearchPage";
 
 const App = () => {
   const navicate = useNavigate();
@@ -80,6 +81,7 @@ const App = () => {
             </>
           }
         />
+        <Route path="/search/:query" element={<SearchPage />} />
       </Routes>
     </Main>
   );

@@ -58,7 +58,19 @@ const MoviePage = () => {
   if (!movie) {
     return <Loading />;
   }
+  const saveToContinueWatching = (item) => {
+    const existing = JSON.parse(localStorage.getItem("continueWatching")) || [];
 
+    // إزالة العنصر إذا كان موجودًا مسبقًا
+    const filtered = existing.filter(
+      (movie) => !(movie.id === item.id && movie.mediaType === item.mediaType)
+    );
+
+    // إضافة العنصر الجديد في البداية
+    const updated = [item, ...filtered].slice(0, 10);
+
+    localStorage.setItem("continueWatching", JSON.stringify(updated));
+  };
   return (
     <Main className="container">
       <Helmet>
@@ -117,16 +129,38 @@ const MoviePage = () => {
           <div className="desc-holder">
             <p className="desc">{movie.overview}</p>
           </div>
-
+          {/* 
           {imdbId && (
             <button
               className="watch-btn"
-              onClick={() =>
+              onClick={() => 
                 window.open(
                   `https://streamimdb.ru/embed/movie/${imdbId}`,
                   "_blank"
                 )
               }
+            >
+              Watch Now
+            </button>
+          )} */}
+          {imdbId && (
+            <button
+              className="watch-btn"
+              onClick={() => {
+                saveToContinueWatching({
+                  id: movie.id,
+                  title: movie.title || movie.name,
+                  poster: movie.poster_path,
+                  backdrop: movie.backdrop_path,
+                  mediaType: "movie", // أو "tv"
+                  imdbId: imdbId,
+                });
+
+                window.open(
+                  `https://streamimdb.ru/embed/movie/${imdbId}`,
+                  "_blank"
+                );
+              }}
             >
               Watch Now
             </button>

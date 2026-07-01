@@ -13,9 +13,18 @@ const Headerr = () => {
     menu.classList.remove("show");
   };
 
-  const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
+
+  const [search, setSearch] = useState("");
   const navigate = useNavigate();
+
+  const searchHandler = (e) => {
+    e.preventDefault();
+
+    if (!search.trim()) return;
+
+    navigate(`/search/${search}`);
+  };
   useEffect(() => {
     const timer = setTimeout(async () => {
       if (search.trim().length < 2) {
@@ -85,7 +94,7 @@ const Headerr = () => {
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <Link className="nav-link active" onClick={closeMenu} to="/">
-                  Trending Movies
+                  Home
                 </Link>
               </li>
 
@@ -95,28 +104,26 @@ const Headerr = () => {
                   onClick={closeMenu}
                   to="/create-post"
                 >
-                  Popular Movies
+                  Movies
                 </Link>
               </li>
 
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link className="nav-link" onClick={closeMenu} to="/about">
                   Top Rated
                 </Link>
-              </li>
-
-              <li className="nav-item">
-                <Link className="nav-link" onClick={closeMenu} to="/about">
-                  Upcoming
-                </Link>
-              </li>
+              </li> */}
 
               <li className="nav-item">
                 <Link className="nav-link" onClick={closeMenu} to="/about">
                   TV Shows
                 </Link>
               </li>
-
+              <li className="nav-item">
+                <Link className="nav-link" onClick={closeMenu} to="/about">
+                  Upcoming
+                </Link>
+              </li>
               {/* LANGUAGE DROPDOWN */}
               <li className="nav-item dropdown">
                 <Link
@@ -155,18 +162,10 @@ const Headerr = () => {
                 Search
               </button>
             </form> */}
-            <form
+            {/* <form
               // onSubmit={searchHandler}
               className="d-flex ms-lg-3 mt-3 mt-lg-0"
             >
-              {/* <input 
-                className="form-control me-2"
-                type="search"
-                placeholder="Search movies or TV shows..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                style={{ background: "transparent", borderColor: "#b89564" }}
-              /> */}
               <input
                 className="form-control me-2 search-input"
                 type="search"
@@ -181,6 +180,28 @@ const Headerr = () => {
               />
 
               <button className="btn my-botton" type="submit">
+                Search
+              </button>
+            </form> */}
+            <form className="d-flex ms-lg-3 mt-3 mt-lg-0">
+              <input
+                className="form-control me-2 search-input"
+                type="search"
+                placeholder="Search movies or TV shows..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                style={{
+                  background: "transparent",
+                  borderColor: "#b89564",
+                  color: "white",
+                }}
+              />
+
+              <button
+                className="btn my-botton"
+                type="submit"
+                onClick={searchHandler}
+              >
                 Search
               </button>
             </form>
