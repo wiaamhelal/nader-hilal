@@ -102,7 +102,7 @@ const Headerr = () => {
                 <Link
                   className="nav-link"
                   onClick={closeMenu}
-                  to="/create-post"
+                  to="/brouse-movies"
                 >
                   Movies
                 </Link>
@@ -115,15 +115,15 @@ const Headerr = () => {
               </li> */}
 
               <li className="nav-item">
-                <Link className="nav-link" onClick={closeMenu} to="/about">
+                <Link className="nav-link" onClick={closeMenu} to="/brouse-tv">
                   TV Shows
                 </Link>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link className="nav-link" onClick={closeMenu} to="/about">
                   Upcoming
                 </Link>
-              </li>
+              </li> */}
               {/* LANGUAGE DROPDOWN */}
               <li className="nav-item dropdown">
                 <Link

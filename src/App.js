@@ -9,7 +9,8 @@ import MoviePage from "./components/MoviePage";
 import TvPage from "./components/TvPage";
 import CreatePost from "./components/CreatePost";
 import SearchPage from "./components/SearchPage";
-
+import ShowMovies from "./components/BrouseMovies";
+import BrouseTvShows from "./components/BrouseTvShows";
 const App = () => {
   const navicate = useNavigate();
   return (
@@ -78,6 +79,24 @@ const App = () => {
             <>
               <Header />
               <CreatePost />
+            </>
+          }
+        />
+        <Route
+          path="/brouse-movies"
+          element={
+            <>
+              <Header />
+              <ShowMovies />
+            </>
+          }
+        />
+        <Route
+          path="/brouse-tv"
+          element={
+            <>
+              <Header />
+              <BrouseTvShows />
             </>
           }
         />
